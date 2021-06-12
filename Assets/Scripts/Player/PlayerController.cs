@@ -1,27 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Movement;
 using Game.Input;
+using Game.Character;
 
 
 namespace Game.Player {
-    [RequireComponent(typeof(Mover)), RequireComponent(typeof(InputController))]
-    public class Player : MonoBehaviour
+    [RequireComponent(typeof(InputController))]
+    public class PlayerController : SlimeController
     {
         // Components & References
-        private Mover mover;
         private InputController inputController;
 
 
-        private void Start() {
-            mover = GetComponent<Mover>();
+        protected override void Awake() {
+            base.Awake();
             inputController = GetComponent<InputController>();
         }
 
         private void FixedUpdate() {
             Vector2 input = inputController.GetMovementInput();
-            mover.UpdatePosition(input);
+            mover.UpdateMoverDirection(input);
         }
     }
 }

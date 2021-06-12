@@ -6,14 +6,37 @@ using UnityEngine;
 namespace Game.Movement {
     public class Mover : MonoBehaviour
     {
-        public Rigidbody2D rb;
+        // Variables        
         public float speed = 100;
 
-        // Change position based on speed and vector
-        public void UpdatePosition(Vector3 dir)
-        {
-            Vector2 force = dir * speed * Time.fixedDeltaTime;
+        private Vector2 moveDir;
+
+        // Components & References
+        private Rigidbody2D rb;
+
+
+        private void Awake() {
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        private void FixedUpdate() {
+            Vector2 force = moveDir * speed * Time.fixedDeltaTime;
             rb.AddForce(force, ForceMode2D.Impulse);
+        }
+
+        // Change the mover direction
+        public void UpdateMoverDirection(Vector3 direction) {
+            moveDir = direction;
+        }
+
+        // Return the current mover direction
+        public Vector2 GetMoverDirection() {
+            return moveDir;
+        }
+
+        // Return the current rigidbody velocity
+        public Vector2 GetVelocity() {
+            return rb.velocity;
         }
     }
 }
