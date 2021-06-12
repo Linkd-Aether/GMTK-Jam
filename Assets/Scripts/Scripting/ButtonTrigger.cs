@@ -20,8 +20,8 @@ namespace Game.Scripting {
 
 
         private void Awake() {
-            BUTTON_PRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Prototyping/Circle");
-            BUTTON_UNPRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Prototyping/Square");
+            BUTTON_PRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Prototyping/Circle");//!!!
+            BUTTON_UNPRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Prototyping/Square");//!!!
 
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
