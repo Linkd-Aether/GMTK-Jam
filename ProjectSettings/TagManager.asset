@@ -7,6 +7,7 @@ TagManager:
   - GFX
   - Enemy
   - Wall
+  - Collectable
   layers:
   - Default
   - TransparentFX
@@ -49,4 +50,7 @@ TagManager:
     locked: 0
   - name: Characters
     uniqueID: 674631533
+    locked: 0
+  - name: UI
+    uniqueID: 3220189593
     locked: 0
