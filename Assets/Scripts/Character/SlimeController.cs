@@ -47,7 +47,7 @@ namespace Game.Character {
             }
         }
 
-        protected virtual void ChangeHealth(float healthChange) {
+        public virtual void ChangeHealth(float healthChange) {
             float slimeAmount = slimeHealth.ChangeSlime(healthChange);
             float newMass = CalculateMassFromSlime(slimeAmount);
             mover.UpdateMass(newMass);

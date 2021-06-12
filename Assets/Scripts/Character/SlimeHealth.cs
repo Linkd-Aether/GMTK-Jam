@@ -84,7 +84,6 @@ namespace Game.Character {
 
             // Changes color between stages using Lerp
             private void ChangeColor(int prevStage, int newStage) {
-                print($"{prevStage}");
                 Color fromColor = colorPerStage[prevStage];
                 Color toColor = colorPerStage[newStage];
 
