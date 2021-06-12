@@ -44,5 +44,9 @@ namespace Game.Interactables {
             }
             ReleaseSpikes();
         }
+
+        private void OnTriggerEnter2D(Collider2D other) {
+            // TODO: Damage Slimes that enter here !!!
+        }
     }
 }
