@@ -8,8 +8,7 @@ namespace Game.Scripting {
     public class ButtonTrigger : Trigger
     {
         // Constants
-        private static Sprite BUTTON_PRESSED_SPRITE;
-        private static Sprite BUTTON_UNPRESSED_SPRITE;
+        private static Sprite BUTTON_PRESSED_SPRITE, BUTTON_UNPRESSED_SPRITE;
         
         // Variables
         public bool buttonReleases = false;
@@ -20,8 +19,8 @@ namespace Game.Scripting {
 
 
         private void Awake() {
-            BUTTON_PRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Prototyping/Circle");//!!!
-            BUTTON_UNPRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Prototyping/Square");//!!!
+            BUTTON_PRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Objects/floor button/Button (2)");
+            BUTTON_UNPRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Objects/floor button/Button (1)");
 
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
