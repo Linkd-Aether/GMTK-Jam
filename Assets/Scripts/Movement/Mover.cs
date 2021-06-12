@@ -7,7 +7,7 @@ namespace Game.Movement {
     public class Mover : MonoBehaviour
     {
         // Variables        
-        public float speed = 100;
+        public float speed = 25;
 
         private Vector2 moveDir;
 
@@ -24,19 +24,29 @@ namespace Game.Movement {
             rb.AddForce(force, ForceMode2D.Impulse);
         }
 
-        // Change the mover direction
-        public void UpdateMoverDirection(Vector3 direction) {
-            moveDir = direction;
-        }
+        #region Forces
+            // Used for adding single impulse in the given direciton
+            public void ImpulseForce(Vector2 forceDir, float forceStrength) {
+                Vector2 force = forceDir * forceStrength;
+                rb.AddForce(force, ForceMode2D.Impulse);
+            }
+        #endregion
 
-        // Return the current mover direction
-        public Vector2 GetMoverDirection() {
-            return moveDir;
-        }
+        #region Get/Set Parameters
+            // Change the mover direction
+            public void UpdateMoverDirection(Vector3 direction) {
+                moveDir = direction;
+            }
 
-        // Return the current rigidbody velocity
-        public Vector2 GetVelocity() {
-            return rb.velocity;
-        }
+            // Return the current mover direction
+            public Vector2 GetMoverDirection() {
+                return moveDir;
+            }
+
+            // Return the current rigidbody velocity
+            public Vector2 GetVelocity() {
+                return rb.velocity;
+            }
+        #endregion
     }
 }
