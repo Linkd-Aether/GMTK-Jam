@@ -23,5 +23,10 @@ namespace Game.Input {
         public bool GetClick(int buttonID) {
             return UnityEngine.Input.GetMouseButtonDown(buttonID);
         }
+
+        // Get key status
+        public bool GetKeyDown(KeyCode key) {
+            return UnityEngine.Input.GetKeyDown(key);
+        }
     }
 }

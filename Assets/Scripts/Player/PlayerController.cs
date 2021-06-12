@@ -22,5 +22,18 @@ namespace Game.Player {
             Vector2 input = inputController.GetMovementInput();
             mover.UpdateMoverDirection(input);
         }
+
+        protected override void Update() {
+            base.Update();
+            
+            // Testing
+            if (inputController.GetKeyDown(KeyCode.Q)) {
+                print("Slime decreased by 2");
+                ChangeHealth(-5);
+            } else if (inputController.GetKeyDown(KeyCode.E)) {
+                print("Slime increased by 2");
+                ChangeHealth(5);
+            }
+        }
     }
 }

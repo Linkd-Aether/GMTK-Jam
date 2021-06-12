@@ -38,6 +38,11 @@ namespace Game.Movement {
                 moveDir = direction;
             }
 
+            // Change the mass
+            public void UpdateMass(float newMass) {
+                rb.mass = newMass;
+            }
+
             // Return the current mover direction
             public Vector2 GetMoverDirection() {
                 return moveDir;
