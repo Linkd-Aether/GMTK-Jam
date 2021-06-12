@@ -2,45 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using Game.Character;
+
 
 namespace Game.Enemy {
-    public class EnemyAI : MonoBehaviour
+    [RequireComponent(typeof(Seeker))]
+    public class EnemyController : SlimeController
     {
         private enum EnemyState {
             Patrol,
             Pursue,
-            Pounce
+            // Pounce
         }
 
         // Variables
         private EnemyState state = EnemyState.Patrol;
-        public float speed = 200f; // remove later
         public Transform target;
 
-        public float patrolSearchDistance = 10f;
-        public float pursueWaypointRange = 1.2f;
-        public float pursuePathGenerateRate = 0.5f;
-        public float pursueTargetPounceRange = 3f;
-        public float pouncingPower = 500f; // remove later
-        public float pouncingPreTime = .75f;
-        public float pouncingPostTime = .25f;
+        public float searchDistance = 10f;
+        public float withinTargetRange = 3f;
+        public float withinWaypointRange = 1.2f;
+        public float pathGenerationRate = 1f;
+
+
+        // public float pouncingPower = 500f; // remove later
+        // public float pouncingPreTime = .75f;
+        // public float pouncingPostTime = .25f;
+
         private int currentWaypoint;
+
 
         // Components & References
         private Seeker seeker;
-        private Rigidbody2D rb;
 
         private Path path;
         
         
-        private void Start()
-        {
-            rb = GetComponent<Rigidbody2D>();
+        protected override void Awake() {
+            base.Awake();
             seeker = GetComponent<Seeker>();
         }
 
-        private void FixedUpdate()
-        {
+        private void FixedUpdate() {
             switch (state) {
                 case (EnemyState.Patrol):
                     PatrolUpdate();
@@ -48,10 +51,9 @@ namespace Game.Enemy {
                 case (EnemyState.Pursue):
                     PursueUpdate();
                     break;
-                case (EnemyState.Pounce):
-                    break;
+                // case (EnemyState.Pounce):
+                //     break;
             }
-            
         }
 
         #region State Changes
@@ -67,12 +69,12 @@ namespace Game.Enemy {
                 state = EnemyState.Pursue;
             }
 
-            private void StateToPounce() {
-                Debug.Log($"{transform.name} Shifting to Pounce State!");
-                ResetPath();
-                state = EnemyState.Pounce;
-                StartCoroutine(PounceOnTarget());
-            }
+            // private void StateToPounce() {
+            //     Debug.Log($"{transform.name} Shifting to Pounce State!");
+            //     ResetPath();
+            //     state = EnemyState.Pounce;
+            //     StartCoroutine(PounceOnTarget());
+            // }
         #endregion
 
         #region Patrol State
@@ -85,7 +87,7 @@ namespace Game.Enemy {
 
             private bool PatrolForTarget() {
                 Vector2 direction = DirectionToTarget();
-                RaycastHit2D hit = Physics2D.Raycast(rb.position, direction, patrolSearchDistance);
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, searchDistance);
                 
                 return (hit.collider != null && hit.collider.tag == "Player");
             }
@@ -94,32 +96,29 @@ namespace Game.Enemy {
         #region Pursue State & Path Generation
             // Update logic for the Pursue state
             private void PursueUpdate() {
-                if (path == null) return;
+                if (path == null || currentWaypoint >= path.vectorPath.Count) return;
 
-                float distanceToTarget = Vector2.Distance(rb.position, target.position);
-                if (distanceToTarget < pursueTargetPounceRange) {
-                    StateToPounce();
-                    return;
-                }
+                float distanceToTarget = Vector2.Distance(transform.position, target.position);
+                // if (distanceToTarget < withinTargetRange) {
+                //     StateToPounce();
+                //     return;
+                // }
 
-                float distanceToWaypoint = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-                if (distanceToWaypoint < pursueWaypointRange) {
+                float distanceToWaypoint = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
+                if (distanceToWaypoint < withinWaypointRange) {
                     currentWaypoint++;
                 }
 
-                Vector2 direction = ((Vector2) path.vectorPath[currentWaypoint] - rb.position).normalized;
-                // pass direction to mover
-                
-                Vector2 force = direction * speed * Time.fixedDeltaTime; //remove later
-                rb.AddForce(force);
+                Vector2 moveDirection = ((Vector2) path.vectorPath[currentWaypoint] - (Vector2) transform.position).normalized;
+                mover.UpdateMoverDirection(moveDirection);
             }
         
             // Generate a path to the target; is generally called via a InvokeRepeating
             private IEnumerator PathGenerate() {
-                float timeSinceLastPath = pursuePathGenerateRate;
+                float timeSinceLastPath = pathGenerationRate;
                 while (true) {
-                    if (timeSinceLastPath >= pursuePathGenerateRate && seeker.IsDone()) {
-                        seeker.StartPath(rb.position, target.position, OnPathGenerated);
+                    if (timeSinceLastPath >= pathGenerationRate && seeker.IsDone()) {
+                        seeker.StartPath(transform.position, target.position, OnPathGenerated);
                         timeSinceLastPath = 0f;
                     } else {
                         timeSinceLastPath += Time.fixedDeltaTime;
@@ -145,27 +144,21 @@ namespace Game.Enemy {
             }
         #endregion
     
-        #region Pounce State
-            // Action for the Patrol state
-            private IEnumerator PounceOnTarget() {
-                Vector2 direction = DirectionToTarget();
-                yield return new WaitForSeconds(pouncingPreTime);
-                Pounce(direction); //change to mover
-                yield return new WaitForSeconds(pouncingPostTime);
-                StateToPursue();
-            }
-
-            // Move to mover
-            private void Pounce(Vector2 dir) {
-                Vector2 force = dir * pouncingPower; //remove later
-                rb.AddForce(force);
-            }
-        #endregion
+        // #region Pounce State
+        //     // Action for the Patrol state
+        //     private IEnumerator PounceOnTarget() {
+        //         Vector2 direction = DirectionToTarget();
+        //         yield return new WaitForSeconds(pouncingPreTime);
+        //         Pounce(direction); //change to mover
+        //         yield return new WaitForSeconds(pouncingPostTime);
+        //         StateToPursue();
+        //     }
+        // #endregion
 
         #region Util Function
             // Returns the direction to the target
             private Vector2 DirectionToTarget() {
-                return ((Vector2) target.position - rb.position).normalized;
+                return ((Vector2) target.position - (Vector2) transform.position).normalized;
             }
         #endregion
     }
