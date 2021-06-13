@@ -5,7 +5,11 @@ using UnityEngine;
 namespace Game.Input {
     public class InputController : MonoBehaviour
     {
+
         public SFXController sfx;
+
+        private bool mouseEnabled = true;
+
         // Get movement vector
         public Vector2 GetMovementInput() {
             Vector2 input = new Vector2();
@@ -33,12 +37,17 @@ namespace Game.Input {
 
         // Get mouse button status
         public bool GetClick(int buttonID) {
+            if (!mouseEnabled) return false;
             return UnityEngine.Input.GetMouseButtonDown(buttonID);
         }
 
         // Get key status
         public bool GetKeyDown(KeyCode key) {
             return UnityEngine.Input.GetKeyDown(key);
+        }
+
+        public void MouseEnable(bool state) {
+            mouseEnabled = state;
         }
     }
 }

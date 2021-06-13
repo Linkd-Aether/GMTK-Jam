@@ -37,7 +37,7 @@ namespace Game.Character
         protected SlimeHealth slimeHealth;
         protected Animator animator;
         private Transform GFXobject;
-        private AudioSource audio;
+        private AudioSource audioSource;
 
 
 
@@ -64,7 +64,7 @@ namespace Game.Character
 
             if (healthBar) healthBar.InitializeMeter(slimeHealth);
 
-            audio = GetComponent<AudioSource>();
+            audioSource = GetComponent<AudioSource>();
         }
 
         protected virtual void Update()
@@ -191,8 +191,8 @@ namespace Game.Character
 
         private void PlayHealEffect(float magnitude)
         {
-            audio.clip = absorb[Random.Range(0, absorb.Length)]; ;
-            audio.Play();
+            audioSource.clip = absorb[Random.Range(0, absorb.Length)];
+            audioSource.Play();
         }
 
         public void HitByKnockback(Vector2 knockbackDir, float knockbackStrength)

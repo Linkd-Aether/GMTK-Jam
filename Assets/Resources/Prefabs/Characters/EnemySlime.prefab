@@ -88,7 +88,7 @@ MonoBehaviour:
   withinTargetRange: 3
   withinWaypointRange: 1.2
   pathGenerationRate: 1
-  pouncingStrength: 20
+  pouncingStrength: 15
   pouncingPreTime: 0.75
   pouncingPostTime: 0.5
   timeRandomMovementAverage: 0.5
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f3e554241bd1e4d9f6ca4f614f0540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 10
 --- !u!95 &6041410927319049176
 Animator:
   serializedVersion: 3

@@ -22,7 +22,7 @@ namespace Game.Enemy {
         private static float BETWEEN_MOVE_TIME_VARIATION = .25f;
         private static float MOVEMENT_STRENGTH_AVERAGE = 15f;
         private static float MOVEMENT_STRENGTH_VARIATION = 5f;
-        
+
         private static float BOSS_BASE_MASS = 2.5f;
         private static float BOSS_MASS_PER_SLIME = .05f;
 
@@ -43,6 +43,9 @@ namespace Game.Enemy {
         // Components & References
         private new ParticleSystem particleSystem;
 
+        public AudioClip[] roar;
+
+        private AudioSource audioSource;
 
         protected override void Awake() {
             base.Awake();
@@ -59,6 +62,8 @@ namespace Game.Enemy {
 
             timeToNextJump = 2 * CalculateWithAvgVar(BETWEEN_JUMP_TIME_AVERAGE, BETWEEN_JUMP_TIME_VARIATION);
             timeToNextMove = 2 * CalculateWithAvgVar(BETWEEN_MOVE_TIME_AVERAGE, BETWEEN_MOVE_TIME_VARIATION);
+
+            this.audioSource = GetComponent<AudioSource>();
         }
 
         protected override void Update() {
@@ -95,6 +100,12 @@ namespace Game.Enemy {
             private void EndJump() {
                 animator.SetBool("Jumping", false); 
                 StartCoroutine(PrepareLanding());
+            }
+
+            private void RoarSound()
+            {
+                audioSource.clip = roar[Random.Range(0, roar.Length)];
+                audioSource.Play();
             }
 
             private void SpawnLanding() {
