@@ -8,7 +8,7 @@ using Game.Character;
     public class SlimePunch : Projectile
     {
         // Constants
-        private static float SIZE_TO_STRENGTH_FACTOR = 5f;
+        private static float SIZE_TO_STRENGTH_FACTOR = 10f;
 
         // Variables
         private List<SlimeController> hitSlimes = new List<SlimeController>();

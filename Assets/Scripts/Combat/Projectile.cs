@@ -72,7 +72,7 @@ namespace Game.Combat {
 
             protected virtual void ProjectileKnockbackOnSlime(SlimeController slime, Vector2 contactPoint, float strengthFactor) {
                 float strength = transform.localScale.x * strengthFactor;
-                Vector2 hitDir = contactPoint - (Vector2) transform.position;
+                Vector2 hitDir = (contactPoint - (Vector2) transform.position).normalized;
                 slime.HitByKnockback(hitDir, strength);
             }
         #endregion

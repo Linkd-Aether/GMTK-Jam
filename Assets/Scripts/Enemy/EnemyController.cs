@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Pathfinding;
 using Game.Character;
 
@@ -17,11 +18,12 @@ namespace Game.Enemy {
         }
         private static float MIN_DAMANGE_FROM_HIT = .75f;
         private static float SIZE_TO_DAMAGE_FACTOR = .15f;
-        private static float DAMAGE_TO_KNOCKBACK_FACTOR = 15f;
+        private static float DAMAGE_TO_KNOCKBACK_FACTOR = 3f;
 
         // Variables
         private EnemyState state = EnemyState.Patrol;
         public SlimeController playerTarget;
+        public UnityEvent slimeDeathEvents;
 
         public float searchDistance = 10f;
         public float chaseDistance = 15f;
@@ -49,16 +51,18 @@ namespace Game.Enemy {
         }
 
         protected override void Update() {
-            base.Update();
-            switch (state) {
-                case (EnemyState.Patrol):
-                    PatrolUpdate();
-                    break;
-                case (EnemyState.Pursue):
-                    PursueUpdate();
-                    break;
-                case (EnemyState.Pounce):
-                    break;
+            if (alive) {
+                base.Update();
+                switch (state) {
+                    case (EnemyState.Patrol):
+                        PatrolUpdate();
+                        break;
+                    case (EnemyState.Pursue):
+                        PursueUpdate();
+                        break;
+                    case (EnemyState.Pounce):
+                        break;
+                }
             }
         }
 
@@ -153,7 +157,7 @@ namespace Game.Enemy {
             // Generate a path to the target; is generally called via a InvokeRepeating
             private IEnumerator PathGenerate() {
                 float timeSinceLastPath = pathGenerationRate;
-                while (true) {
+                while (playerTarget != null) {
                     if (timeSinceLastPath >= pathGenerationRate && seeker.IsDone()) {
                         seeker.StartPath(transform.position, playerTarget.transform.position, OnPathGenerated);
                         timeSinceLastPath = 0f;
@@ -234,7 +238,7 @@ namespace Game.Enemy {
                     float damage = CalculateDamage();
                     playerSlime.ChangeHealth(-CalculateDamage());
 
-                    Vector2 knockbackDir = other.GetContact(0).point - (Vector2) transform.position;
+                    Vector2 knockbackDir = (other.GetContact(0).point - (Vector2) transform.position).normalized;
                     float knockbackStrength = damage * DAMAGE_TO_KNOCKBACK_FACTOR;
                     playerSlime.HitByKnockback(knockbackDir, knockbackStrength);
                 }
@@ -242,6 +246,20 @@ namespace Game.Enemy {
 
             private float CalculateDamage() {
                 return MIN_DAMANGE_FROM_HIT + SIZE_TO_DAMAGE_FACTOR * slimeHealth.slimeCount;
+            }
+        #endregion
+
+        #region Death
+            protected override void SlimeDeathBegin() {
+                base.SlimeDeathBegin();
+                
+                ResetPath();
+            }
+
+            protected override void SlimeDeathEnded() {
+                base.SlimeDeathEnded();
+
+                slimeDeathEvents.Invoke();
             }
         #endregion
     }

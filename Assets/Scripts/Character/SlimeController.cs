@@ -131,6 +131,13 @@ namespace Game.Character {
             public void HitByKnockback(Vector2 knockbackDir, float knockbackStrength) {
                 mover.ImpulseForce(knockbackDir, knockbackStrength);
             }
+
+            public void HitByKnockbackOppositeDirection(float knockbackStrength) {
+                Vector2 currentDirection = mover.GetMoverDirection();
+                if (currentDirection == Vector2.zero) currentDirection = mover.GetVelocity().normalized;
+                
+                HitByKnockback(-currentDirection, knockbackStrength);
+            }
         #endregion
 
         private float CalculateMassFromSlime(float slimeAmount) {
