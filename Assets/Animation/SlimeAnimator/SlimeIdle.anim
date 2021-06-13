@@ -31,8 +31,12 @@ AnimationClip:
       value: {fileID: 7285092867988605863, guid: 3dabc662c6dfdda47a6d8e349d897a05, type: 3}
     - time: 0.8333333
       value: {fileID: 2585141923338621245, guid: 3dabc662c6dfdda47a6d8e349d897a05, type: 3}
+    - time: 1
+      value: {fileID: 3746557051171761099, guid: 3dabc662c6dfdda47a6d8e349d897a05, type: 3}
+    - time: 1.1666666
+      value: {fileID: 3746557051171761099, guid: 3dabc662c6dfdda47a6d8e349d897a05, type: 3}
     attribute: m_Sprite
-    path: 
+    path: SlimeGFX
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 6
@@ -43,7 +47,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 108678530
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -56,12 +60,14 @@ AnimationClip:
     - {fileID: -8774225480297962013, guid: 3dabc662c6dfdda47a6d8e349d897a05, type: 3}
     - {fileID: 7285092867988605863, guid: 3dabc662c6dfdda47a6d8e349d897a05, type: 3}
     - {fileID: 2585141923338621245, guid: 3dabc662c6dfdda47a6d8e349d897a05, type: 3}
+    - {fileID: 3746557051171761099, guid: 3dabc662c6dfdda47a6d8e349d897a05, type: 3}
+    - {fileID: 3746557051171761099, guid: 3dabc662c6dfdda47a6d8e349d897a05, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 1.3333333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

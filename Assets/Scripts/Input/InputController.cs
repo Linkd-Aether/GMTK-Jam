@@ -15,8 +15,15 @@ namespace Game.Input {
 
         // Get aim location
         public Vector2 GetMouseLocation() {
-            // must translate mouse position to world coordinates !!!
-            return UnityEngine.Input.mousePosition;
+            Vector2 screenPos = UnityEngine.Input.mousePosition;
+            Vector2 worldPos =  Camera.main.ScreenToWorldPoint(screenPos);
+            return worldPos;
+        }
+
+        // Get mouse direction from origin
+        public Vector2 GetMouseDirection(Vector2 origin) {
+            Vector2 mousePos = GetMouseLocation();
+            return (mousePos - origin).normalized;
         }
 
         // Get mouse button status

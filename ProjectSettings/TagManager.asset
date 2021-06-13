@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GFX
   - Enemy
+  - Wall
   - Collectable
   - Water
   layers:
@@ -50,6 +51,9 @@ TagManager:
     locked: 0
   - name: Characters
     uniqueID: 674631533
+    locked: 0
+  - name: Wall
+    uniqueID: 886611731
     locked: 0
   - name: UI
     uniqueID: 3220189593
