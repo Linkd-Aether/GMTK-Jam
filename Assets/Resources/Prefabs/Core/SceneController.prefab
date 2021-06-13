@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3133586382036822300}
-  - component: {fileID: 3133586382036822303}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -32,22 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3133586382036822303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3133586382036822301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44f6232e8624df041af733f694bd9181, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextIndex: 0
-  levelName: 
-  spriteRenderer: {fileID: 3133586382313422882}
-  animator: {fileID: 3133586382313423836}
 --- !u!1 &3133586382313422883
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +78,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -127,7 +111,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &3133586382313423836
@@ -140,7 +124,7 @@ Animator:
   m_GameObject: {fileID: 3133586382313422883}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 03da5fcb49bb0cf4586cc069850da42f, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5710799447528038581}
   - component: {fileID: 5710799447528038580}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SlimeballGFX
   m_TagString: GFX
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 674631533
+  m_SortingLayerID: -1352718795
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -6395106671556773043, guid: 07a355840e23ee4488f86dcb2b1787c4, type: 3}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5070260904197661177}
   - component: {fileID: 5710799447986748247}
   - component: {fileID: 5710799447986748246}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SlimeBall
   m_TagString: Projectile
   m_Icon: {fileID: 0}

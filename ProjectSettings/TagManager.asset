@@ -15,7 +15,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Projectile
   - Water
   - UI
   - Obstacle
@@ -51,11 +51,11 @@ TagManager:
   - name: Floor
     uniqueID: 3766275891
     locked: 0
-  - name: Main
-    uniqueID: 2942248501
-    locked: 0
   - name: Walls
     uniqueID: 550025563
+    locked: 0
+  - name: Main
+    uniqueID: 2942248501
     locked: 0
   - name: UI
     uniqueID: 3220189593
