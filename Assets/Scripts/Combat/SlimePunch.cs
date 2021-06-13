@@ -7,20 +7,24 @@ using Game.Character;
     namespace Game.Combat {
     public class SlimePunch : Projectile
     {
+        // Constants
+        private static float SIZE_TO_STRENGTH_FACTOR = 5f;
+
+        // Variables
+        private List<SlimeController> hitSlimes = new List<SlimeController>();
+
+
         protected override void Start() {
             // TODO: SLIMEPUNCH SFX !!!
         }
 
-        // protected override void HitSlime(SlimeController slime) {
-        //     base.HitSlime(slime);
-        // }
+        protected override void HitSlime(SlimeController slime, Vector2 contactPoint) {
+            if (!hitSlimes.Contains(slime)) {
+                base.HitSlime(slime, contactPoint);
 
-        // protected override void HitBreakable() {
-        //     base.HitBreakable();
-        // }
-
-        // protected override void HitWall() {
-        //     base.HitWall();
-        // }
+                ProjectileKnockbackOnSlime(slime, contactPoint, SIZE_TO_STRENGTH_FACTOR);
+                hitSlimes.Add(slime);
+            }
+        }
     }
 }

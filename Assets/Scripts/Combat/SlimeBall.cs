@@ -9,7 +9,8 @@ namespace Game.Combat {
     public class SlimeBall : Projectile
     {
         // Constants
-        private float SLIMEBALL_LIFETIME = 2.5f;
+        private static float SIZE_TO_STRENGTH_FACTOR = 10f;
+        private static float SLIMEBALL_LIFETIME = 2.5f;
 
         // Variables
         public float speed = 400f;
@@ -44,7 +45,7 @@ namespace Game.Combat {
         protected override void OnCollisionEnter2D(Collision2D other)
         {
             base.OnCollisionEnter2D(other);
-            
+
             Vector2 contactPoint = other.GetContact(0).point;
             if (other.collider.tag == "Wall") {
                 HitWall(contactPoint);
@@ -59,6 +60,13 @@ namespace Game.Combat {
         protected override void HitSomething(Vector2 contactPoint) {
             base.HitSomething(contactPoint);
             DespawnProjectile();
+        }
+
+        protected override void HitSlime(SlimeController slime, Vector2 contactPoint)
+        {
+            base.HitSlime(slime, contactPoint);
+
+            ProjectileKnockbackOnSlime(slime, contactPoint, SIZE_TO_STRENGTH_FACTOR);
         }
 
         private void EndProjectile() {

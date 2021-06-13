@@ -70,6 +70,12 @@ namespace Game.Combat {
                 SlimeSplatter splatter = splatterObj.GetComponent<SlimeSplatter>();
                 splatter.SetBaseColor(baseColor);
             }
+
+            protected virtual void ProjectileKnockbackOnSlime(SlimeController slime, Vector2 contactPoint, float strengthFactor) {
+                float strength = transform.localScale.x * strengthFactor;
+                Vector2 hitDir = contactPoint - (Vector2) transform.position;
+                slime.HitByKnockback(hitDir, strength);
+            }
         #endregion
     }  
 }

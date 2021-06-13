@@ -93,6 +93,12 @@ namespace Game.Character {
             }
         #endregion
 
+        #region 
+            public void HitByKnockback(Vector2 knockbackDir, float knockbackStrength) {
+                mover.ImpulseForce(knockbackDir, knockbackStrength);
+            }
+        #endregion
+
         private float CalculateMassFromSlime(float slimeAmount) {
             return baseMass + slimeAmount * massPerSlime;
         }
