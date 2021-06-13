@@ -15,10 +15,10 @@ namespace Game.Enemy {
 
         private static float IN_AIR_TIME_AVERAGE = 1.5f;
         private static float IN_AIR_TIME_VARIATION = 1f;
-        private static float BETWEEN_JUMP_TIME_AVERAGE = 3f; // raise
-        private static float BETWEEN_JUMP_TIME_VARIATION = 2f; // raise
-        private static float BETWEEN_MOVE_TIME_AVERAGE = 2f;
-        private static float BETWEEN_MOVE_TIME_VARIATION = 1f;
+        private static float BETWEEN_JUMP_TIME_AVERAGE = 4f;
+        private static float BETWEEN_JUMP_TIME_VARIATION = 1f;
+        private static float BETWEEN_MOVE_TIME_AVERAGE = .5f;
+        private static float BETWEEN_MOVE_TIME_VARIATION = .25f;
         private static float MOVEMENT_STRENGTH_AVERAGE = 15f;
         private static float MOVEMENT_STRENGTH_VARIATION = 5f;
         

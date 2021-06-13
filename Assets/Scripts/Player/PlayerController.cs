@@ -51,13 +51,6 @@ namespace Game.Player {
                         SlimePunchAttack(dir);
                     } 
                 }
-
-                // Testing
-                if (inputController.GetKeyDown(KeyCode.Q)) {
-                    ChangeHealth(-1);
-                } else if (inputController.GetKeyDown(KeyCode.E)) {
-                    ChangeHealth(1);
-                }
             }
         }
 

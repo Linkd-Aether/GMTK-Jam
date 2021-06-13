@@ -25,7 +25,7 @@ namespace Game.Combat {
 
         
         // Variables
-        public float slimeValue = 1f;
+        public float slimeValue;
 
         private bool pickable = false;
 
@@ -78,11 +78,13 @@ namespace Game.Combat {
                 float range = Random.Range(MIN_SPAWN_DIST, MAX_SPAWN_DIST);
 
                 GameObject freeSlimeObj = Instantiate(FREE_SLIME_PREFAB, (Vector2) origin + dir * range, Quaternion.Euler(0,0,0));
-                freeSlimeObj.transform.localScale = Vector3.one * Random.Range(SPAWN_SIZE_AVG-SPAWN_SIZE_VAR, SPAWN_SIZE_AVG+SPAWN_SIZE_VAR);
                 
                 FreeSlime freeSlime = freeSlimeObj.GetComponent<FreeSlime>();
+                freeSlime.slimeValue = Random.Range(SPAWN_SIZE_AVG-SPAWN_SIZE_VAR, SPAWN_SIZE_AVG+SPAWN_SIZE_VAR);
                 freeSlime.SetBaseColor(color);
                 freeSlime.StartCoroutine(freeSlime.SpawnIn());
+
+                freeSlimeObj.transform.localScale = Vector3.one * freeSlime.slimeValue;
             }
 
             private static Vector2 FindFreeDirection(Vector2 origin, Vector2 dir) {

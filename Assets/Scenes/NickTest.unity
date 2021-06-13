@@ -1304,6 +1304,10 @@ PrefabInstance:
       value: BossSlime
       objectReference: {fileID: 0}
     - target: {fileID: 5115119419162367510, guid: d894c46e8222db14a8c0047bea10da26, type: 3}
+      propertyPath: active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5115119419162367510, guid: d894c46e8222db14a8c0047bea10da26, type: 3}
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 1478613761}
