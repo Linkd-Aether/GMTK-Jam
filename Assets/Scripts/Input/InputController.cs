@@ -8,7 +8,7 @@ namespace Game.Input {
 
         public SFXController sfx;
 
-        private bool mouseEnabled = true;
+        private bool mouseEnabled = false;
 
         // Get movement vector
         public Vector2 GetMovementInput() {
