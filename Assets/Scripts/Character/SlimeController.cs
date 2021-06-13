@@ -4,6 +4,7 @@ using UnityEngine;
 using Game.Movement;
 using Game.Utils;
 using Game.Combat;
+using Game.UI;
 
 
 namespace Game.Character {
@@ -23,9 +24,11 @@ namespace Game.Character {
         protected bool alive = true;
         
         // Components & References
+        public SlimeMeter healthBar;
+        
         protected Mover mover;
         protected SlimeHealth slimeHealth;
-        private Animator animator;
+        protected Animator animator;
         private Transform GFXobject;
 
 
@@ -47,6 +50,8 @@ namespace Game.Character {
 
             float newMass = CalculateMassFromSlime(slimeHealth.slimeCount);
             mover.UpdateMass(newMass);
+
+            if (healthBar) healthBar.InitializeMeter(slimeHealth);
         }
 
         protected virtual void Update() {
@@ -79,6 +84,8 @@ namespace Game.Character {
                     SlimeDeathBegin();
                     alive = false;
                 }
+
+                if (healthBar) healthBar.UpdateMeter(slimeHealth);
             }
 
             // Spawn a projectile based slimeball attack
@@ -140,7 +147,7 @@ namespace Game.Character {
             }
         #endregion
 
-        private float CalculateMassFromSlime(float slimeAmount) {
+        protected float CalculateMassFromSlime(float slimeAmount) {
             return baseMass + slimeAmount * massPerSlime;
         }
 

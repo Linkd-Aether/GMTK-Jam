@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Input;
 using Game.Character;
-using Game.UI;
 
 
 namespace Game.Player {
@@ -18,19 +17,12 @@ namespace Game.Player {
         private float timeToAttack = 0f;
 
         // Components & References
-        public SlimeMeter healthBar;
-
         private InputController inputController;
 
 
         protected override void Awake() {
             base.Awake();
             inputController = GetComponent<InputController>();
-        }
-
-        protected override void Start() {
-            base.Start();
-            if (healthBar) healthBar.InitializeMeter(slimeHealth);
         }
 
         private void FixedUpdate() {
@@ -62,18 +54,11 @@ namespace Game.Player {
 
                 // Testing
                 if (inputController.GetKeyDown(KeyCode.Q)) {
-                    print("Slime decreased by 1");
                     ChangeHealth(-1);
                 } else if (inputController.GetKeyDown(KeyCode.E)) {
-                    print("Slime increased by 1");
                     ChangeHealth(1);
                 }
             }
-        }
-        
-        public override void ChangeHealth(float healthChange) {
-            base.ChangeHealth(healthChange);
-            if (healthBar) healthBar.UpdateMeter(slimeHealth);
         }
 
         protected override void SlimeDeathEnded()
