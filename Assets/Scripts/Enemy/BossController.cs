@@ -13,10 +13,10 @@ namespace Game.Enemy {
             Jump,
         }
 
-        private static float IN_AIR_TIME_AVERAGE = 3f;
-        private static float IN_AIR_TIME_VARIATION = 3f;
-        private static float BETWEEN_JUMP_TIME_AVERAGE = 9f;
-        private static float BETWEEN_JUMP_TIME_VARIATION = 4f;
+        private static float IN_AIR_TIME_AVERAGE = 1.5f;
+        private static float IN_AIR_TIME_VARIATION = 1f;
+        private static float BETWEEN_JUMP_TIME_AVERAGE = 3f; // raise
+        private static float BETWEEN_JUMP_TIME_VARIATION = 2f; // raise
         private static float BETWEEN_MOVE_TIME_AVERAGE = 2f;
         private static float BETWEEN_MOVE_TIME_VARIATION = 1f;
         private static float MOVEMENT_STRENGTH_AVERAGE = 15f;
@@ -25,8 +25,14 @@ namespace Game.Enemy {
         private static float BOSS_BASE_MASS = 2.5f;
         private static float BOSS_MASS_PER_SLIME = .05f;
 
+        private static float JUMP_BASE_DAMAGE = 2f;
+        private static float IDLE_BASE_DAMAGE = 1f;
+        private static float SIZE_TO_DAMAGE_FACTOR = .05f;
+        private static float DAMAGE_TO_KNOCKBACK_FACTOR = 5f;
+
         // Variables
         public SlimeController playerTarget;
+        public bool active = false;
 
         private BossState state;
         private float timeToNextJump;
@@ -46,7 +52,7 @@ namespace Game.Enemy {
         }
 
         protected override void Update() {
-            if (alive) {
+            if (alive && active) {
                 base.Update();
 
                 switch (state) {
@@ -61,20 +67,19 @@ namespace Game.Enemy {
 
         #region Animation/Activation Hooks
             public void ActivateBoss() {
+                active = true;
                 animator.SetBool("Roar", true);
                 state = BossState.Idle;
             }
 
             private void BeginJumpCycle() {
                 animator.SetBool("Roar", true);
+                animator.SetBool("Jumping", true); 
                 state = BossState.Jump;
             }
 
             private void EndRoar() { 
-                animator.SetBool("Roar", false); 
-                if (state == BossState.Jump) {
-                    animator.SetBool("Jumping", true); 
-                }
+                animator.SetBool("Roar", false);
             }
 
             private void EndJump() {
@@ -157,6 +162,31 @@ namespace Game.Enemy {
                 } else {
                     return Mathf.Sqrt(Mathf.Clamp(1 - percentLeft, .15f, 1f));
                 }
+            }
+        #endregion
+
+        #region Collision & Damage
+            private void OnCollisionEnter2D(Collision2D other) {
+                if (other.collider.gameObject.tag == "Player") {
+                    SlimeController playerSlime = other.gameObject.GetComponent<SlimeController>();
+
+                    float damage = CalculateDamage();
+                    playerSlime.ChangeHealth(-damage);
+
+                    Vector2 knockbackDir = (other.GetContact(0).point - (Vector2) transform.position).normalized;
+                    float knockbackStrength = damage * DAMAGE_TO_KNOCKBACK_FACTOR;
+                    playerSlime.HitByKnockback(knockbackDir, knockbackStrength);
+                }
+            }
+
+            private float CalculateDamage() {
+                float baseDamage, massDamage;
+                if (state == BossState.Jump) baseDamage = JUMP_BASE_DAMAGE;
+                else baseDamage = IDLE_BASE_DAMAGE;
+                
+                massDamage = SIZE_TO_DAMAGE_FACTOR * slimeHealth.slimeCount;
+
+                return baseDamage + massDamage;
             }
         #endregion
     }

@@ -54,10 +54,8 @@ namespace Game.Player {
 
                 // Testing
                 if (inputController.GetKeyDown(KeyCode.Q)) {
-                    print("Slime decreased by 1");
                     ChangeHealth(-1);
                 } else if (inputController.GetKeyDown(KeyCode.E)) {
-                    print("Slime increased by 1");
                     ChangeHealth(1);
                 }
             }

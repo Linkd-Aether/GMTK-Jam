@@ -233,11 +233,11 @@ namespace Game.Enemy {
 
         #region Collision & Damage {
             private void OnCollisionEnter2D(Collision2D other) {
-                if (other.gameObject.tag == "Player") {
+                if (other.collider.gameObject.tag == "Player") {
                     SlimeController playerSlime = other.gameObject.GetComponent<SlimeController>();
 
                     float damage = CalculateDamage();
-                    playerSlime.ChangeHealth(-CalculateDamage());
+                    playerSlime.ChangeHealth(-damage);
 
                     Vector2 knockbackDir = (other.GetContact(0).point - (Vector2) transform.position).normalized;
                     float knockbackStrength = damage * DAMAGE_TO_KNOCKBACK_FACTOR;
