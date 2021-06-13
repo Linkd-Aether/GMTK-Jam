@@ -10,6 +10,13 @@ namespace Game.Player {
     [RequireComponent(typeof(InputController))]
     public class PlayerController : SlimeController
     {
+        // Constants
+        private float SHOOTING_DELAY = .5f;
+        private float PUNCHING_DELAY = 1f;
+
+        // Variables
+        private float timeToAttack = 0f;
+
         // Components & References
         public SlimeMeter healthBar;
 
@@ -34,6 +41,22 @@ namespace Game.Player {
         protected override void Update() {
             base.Update();
             
+            if (timeToAttack > 0) {
+                timeToAttack -= Time.deltaTime;
+            } else {
+                if (inputController.GetClick(0)) {
+                    timeToAttack = SHOOTING_DELAY;
+                    
+                    Vector2 dir = inputController.GetMouseDirection(transform.position);
+                    SlimeBallAttack(dir);
+                } else if (inputController.GetClick(1)) {
+                    timeToAttack = PUNCHING_DELAY;
+
+                    Vector2 dir = inputController.GetMouseDirection(transform.position);
+                    SlimePunchAttack(dir);
+                } 
+            }
+
             // Testing
             if (inputController.GetKeyDown(KeyCode.Q)) {
                 print("Slime decreased by 1");

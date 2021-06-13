@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class GFXobject : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer;
-    public Color baseColor;
+    protected SpriteRenderer spriteRenderer;
+    protected Color baseColor;
 
+
+    protected virtual void Awake() {
+        LoadComponents();
+    }
 
     protected virtual void Start() {
-        LoadComponents();
+        baseColor = spriteRenderer.color;
     }
 
     public void SetBaseColor(Color color) {
@@ -18,6 +23,12 @@ public abstract class GFXobject : MonoBehaviour
     }
 
     public void SetColor(Color color) {
+        spriteRenderer.color = color;
+    }
+
+    public void SetAlpha(float alpha) {
+        Color color = spriteRenderer.color;
+        color.a = alpha;
         spriteRenderer.color = color;
     }
 

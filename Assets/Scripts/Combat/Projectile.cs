@@ -1,69 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Character;
+using Game.Utils;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class Projectile : GFXobject
-{
-    // Variables
-    public GameObject shooter; //TODO: Make the shooter class
-    public Vector2 direction;
-    protected float maxDistance;
-    protected int damage;
-    protected Vector2 origin;
 
-    // Components
-    protected Rigidbody2D rb;
-
-    // Prefab
-    public GameObject splat;
-
-    // Start is called before the first frame update
-    protected override void Start()
+namespace Game.Combat {
+    public abstract class Projectile : GFXobject
     {
-        base.Start();
+        // Constants
+        private static GameObject SLIME_SPLATTER_PREFAB;
+        
+        // Variables
+        public Vector2 direction;
 
-        rb = GetComponent<Rigidbody2D>();
-        //SetBaseColor(shooter.baseColor);
+        protected float slimeValue;
+        protected SlimeController shooter;
 
-        origin = this.transform.position;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Vector2.Distance(this.transform.position, origin) > maxDistance)
-        {
-            StartCoroutine(Splat());
+        protected override void Awake() {
+            base.Awake();
+
+            SLIME_SPLATTER_PREFAB = Resources.Load<GameObject>("Prefabs/Combat/SlimeSplatter");
         }
-    }
 
-    public void Hit()
-    {
-        //AudioManager.PlaySound("BulletHit");
-        Destroy(this.gameObject);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.collider.tag == "Wall")
-        {
-            StartCoroutine(Splat());
+        public void SetupProjectile(SlimeController shotBy, Vector2 dir, float slimeCost, Color slimeColor) {
+            shooter = shotBy;
+            direction = dir;
+            slimeValue = slimeCost;
+            SetBaseColor(slimeColor);
         }
-        else if(collision.collider.tag == "Enemy" || collision.collider.tag == "Player")
-        {
-            // Mob mob = collision.collider.GetComponent<Mob>();
-            // TODO: Deal damage on hit but don't splat
-            Hit();
-        }
-    }
 
-    protected IEnumerator Splat()
-    {
-        //yield return StartCoroutine(FadeLerp(FADEOUT_TIME, 0));
-        //TODO: play splat sound effect and animation
-        Instantiate(splat, this.transform.position, Quaternion.identity);
-        Destroy(this.gameObject);
-        yield return null;
-    }
+        #region Collision & Projectile Handling
+            protected virtual void OnCollisionEnter2D(Collision2D other) {
+                Vector2 contactPoint = other.GetContact(0).point;
+                if (other.collider.tag == "Enemy" || other.collider.tag == "Player") {
+                    SlimeController slimeController = other.collider.GetComponent<SlimeController>();
+                    if (slimeController != shooter) {
+                        HitSlime(slimeController, contactPoint);
+                    }
+                } else if (other.collider.tag == "Breakable") {
+                    HitBreakable(contactPoint);
+                }
+            }
+
+            protected virtual void HitSlime(SlimeController slime, Vector2 contactPoint) {
+                // Hurt Slime Animation !!!
+                // Reduce Health !!!
+                // Play Slime Hit SFX !!!
+                HitSomething(contactPoint);
+            }
+            protected virtual void HitBreakable(Vector2 contactPoint) {
+                // Play Breaking Animation !!!
+                // Play Breakable Object Hit SFX !!!
+                HitSomething(contactPoint);
+            }
+            protected virtual void HitSomething(Vector2 contactPoint) {
+                SpawnSplatter(contactPoint);
+            }
+        #endregion
+
+        #region Projectile Logic
+            protected virtual void DespawnProjectile() {
+                Destroy(this.gameObject);
+            }
+
+            protected virtual void SpawnSplatter(Vector2 position) {
+                GameObject splatterObj = Instantiate(SLIME_SPLATTER_PREFAB, position, Quaternion.Euler(0, 0, Random.Range(-180, 180)));
+                SlimeSplatter splatter = splatterObj.GetComponent<SlimeSplatter>();
+                splatter.SetBaseColor(baseColor);
+            }
+        #endregion
+    }  
 }
