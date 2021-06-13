@@ -134,6 +134,11 @@ namespace Game.Character {
             private int CalculateStage(float slimeValue) {
                 return (int) Mathf.Floor(slimeValue / slimePerStage);
             }
+
+            public Color GetCurrentColor() {
+                if (usesStages) return colorPerStage[currentStage];
+                else return spriteRenderer.color;
+            }
         #endregion
     }
 }

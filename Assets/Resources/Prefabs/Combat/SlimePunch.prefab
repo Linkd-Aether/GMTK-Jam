@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3153138453538955292}
   - component: {fileID: 3153138453538955293}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SlimePunchGFX
   m_TagString: GFX
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 674631533
+  m_SortingLayerID: -1352718795
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -3628014940582454167, guid: 72ec0261ecb2b814c881e2a836fd6a43, type: 3}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3153138454146628606}
   - component: {fileID: 3153138454146628596}
   - component: {fileID: 8063712314933711781}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SlimePunch
   m_TagString: Projectile
   m_Icon: {fileID: 0}
