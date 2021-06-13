@@ -161,9 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53deecac0137e5a44a167ca90049bf80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slimeCount: 5
-  sizeMinimum: 0.35
-  sizeChangePerSlime: 0.05
+  slimeCount: 3
+  sizeMinimum: 0.5
+  sizeChangePerSlime: 0.1
   usesStages: 0
   slimePerStage: 0.5
   sizeChangePerStage: 0.3
