@@ -34,7 +34,6 @@ namespace Game.Combat {
         #region Collision & Projectile Handling
             protected virtual void OnCollisionEnter2D(Collision2D other) {
                 if (other.gameObject != shooter.gameObject) {
-                    print(other.gameObject.name);
                     Vector2 contactPoint = other.GetContact(0).point;
                     HitSomething(contactPoint);
 
