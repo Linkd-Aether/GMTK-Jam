@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game.Input {
     public class InputController : MonoBehaviour
     {
-        private bool mouseEnabled = true;
+        private bool mouseEnabled = false;
 
         // Get movement vector
         public Vector2 GetMovementInput() {

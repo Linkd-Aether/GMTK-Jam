@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Game.Character;
 using Game.Combat;
 
@@ -33,6 +34,7 @@ namespace Game.Enemy {
 
         // Variables
         public SlimeController playerTarget;
+        public UnityEvent slimeDeathEvents;
         public bool active = false;
 
         private BossState state;
@@ -212,5 +214,11 @@ namespace Game.Enemy {
                 return baseDamage + massDamage;
             }
         #endregion
+
+        protected override void SlimeDeathEnded() {
+            base.SlimeDeathEnded();
+
+            slimeDeathEvents.Invoke();
+        }
     }
 }
