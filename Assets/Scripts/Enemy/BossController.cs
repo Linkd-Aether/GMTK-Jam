@@ -86,9 +86,11 @@ namespace Game.Enemy {
 
         #region Animation/Activation Hooks
             public void ActivateBoss() {
-                active = true;
-                animator.SetBool("Roar", true);
-                state = BossState.Idle;
+                if (!active) {
+                    active = true;
+                    animator.SetBool("Roar", true);
+                    state = BossState.Idle;
+                }
             }
 
             private void BeginJumpCycle() {
