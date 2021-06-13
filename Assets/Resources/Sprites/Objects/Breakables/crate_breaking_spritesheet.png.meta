@@ -1,28 +1,22 @@
 fileFormatVersion: 2
-guid: d41c74faa478f004fb35f3f7c7a0c7a4
+guid: 989136573da323e4ca8038cf18806796
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5814992158310223973
-    second: SlimeMovingBody_Spritesheet_0
+      213: -1115755501902165491
+    second: crate_breaking_spritesheet_0
   - first:
-      213: 3473218645677501957
-    second: SlimeMovingBody_Spritesheet_1
+      213: -5316991752483932059
+    second: crate_breaking_spritesheet_1
   - first:
-      213: -7489992035573207869
-    second: SlimeMovingBody_Spritesheet_2
+      213: -782880351983928048
+    second: crate_breaking_spritesheet_2
   - first:
-      213: 2245788272133604378
-    second: SlimeMovingBody_Spritesheet_3
+      213: 3158704616532313173
+    second: crate_breaking_spritesheet_3
   - first:
-      213: -2828538711155187549
-    second: SlimeMovingBody_Spritesheet_4
-  - first:
-      213: -6633324159049852746
-    second: SlimeMovingBody_Spritesheet_5
-  - first:
-      213: 378067503332941663
-    second: SlimeMovingBody_Spritesheet_6
+      213: 4227769847448138558
+    second: crate_breaking_spritesheet_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_0
+      name: crate_breaking_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -132,20 +126,20 @@ TextureImporter:
         width: 1920
         height: 1080
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.39875734, y: 0.12427677}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56053cf0f8003b050800000000000000
-      internalID: 5814992158310223973
+      spriteID: d0a0fe4584a0480f0800000000000000
+      internalID: -1115755501902165491
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_1
+      name: crate_breaking_spritesheet_1
       rect:
         serializedVersion: 2
         x: 1920
@@ -153,41 +147,41 @@ TextureImporter:
         width: 1920
         height: 1080
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.37224135, y: 0.12856218}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50eeed2d4f9533030800000000000000
-      internalID: 3473218645677501957
+      spriteID: 5687387fb204636b0800000000000000
+      internalID: -5316991752483932059
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_2
+      name: crate_breaking_spritesheet_2
       rect:
         serializedVersion: 2
-        x: 3859
+        x: 3840
         y: 0
         width: 1920
         height: 1080
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.4130193, y: 0.1134192}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cc67256de33e0890800000000000000
-      internalID: -7489992035573207869
+      spriteID: 01d7d5eb776a225f0800000000000000
+      internalID: -782880351983928048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_3
+      name: crate_breaking_spritesheet_3
       rect:
         serializedVersion: 2
         x: 5760
@@ -195,77 +189,35 @@ TextureImporter:
         width: 1920
         height: 1080
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.40939534, y: 0.100533165}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a140349e884aa2f10800000000000000
-      internalID: 2245788272133604378
+      spriteID: 5548bcafc19f5db20800000000000000
+      internalID: 3158704616532313173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_4
+      name: crate_breaking_spritesheet_4
       rect:
         serializedVersion: 2
-        x: 7699
+        x: 7680
         y: 0
         width: 1920
         height: 1080
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.40939584, y: 0.1134192}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a0672847030fb8d0800000000000000
-      internalID: -2828538711155187549
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_5
-      rect:
-        serializedVersion: 2
-        x: 9600
-        y: 0
-        width: 1920
-        height: 1080
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6b811db72d2b1f3a0800000000000000
-      internalID: -6633324159049852746
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_6
-      rect:
-        serializedVersion: 2
-        x: 11520
-        y: 0
-        width: 1920
-        height: 1080
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f5f5745246a2f3500800000000000000
-      internalID: 378067503332941663
+      spriteID: e33f04dc64e0caa30800000000000000
+      internalID: 4227769847448138558
       vertices: []
       indices: 
       edges: []
