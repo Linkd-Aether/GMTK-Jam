@@ -48,6 +48,7 @@ public abstract class GFXobject : MonoBehaviour
         }
     }
 
+    // THIS SHOULD NOT BE HERE BUT I NEEDED ACCESS TO IT IN TWO CHILDREN !!!
     protected static Vector2 FindFreeDirection(Vector2 origin, Vector2 dir, float checkDistance) {
         float angleVar = Random.Range(-FREE_ANGLE_VAR, FREE_ANGLE_VAR);
         float checkAngle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleVar) % 360;
