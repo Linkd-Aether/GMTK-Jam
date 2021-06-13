@@ -33,6 +33,8 @@ namespace Game.Interactables {
         private void Start() {
             if (startUp) {
                 RaiseSpikes();
+            } else {
+                collider.enabled = false;
             }
         }
 

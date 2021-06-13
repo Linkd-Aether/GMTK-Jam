@@ -15,11 +15,10 @@ namespace Game.Combat {
 
         private static float MIN_SPAWN_DIST = .2f;
         private static float MAX_SPAWN_DIST = .8f;
-        private static float SPAWN_SIZE_AVG = .5f;
+        private static float SPAWN_SIZE_AVG = 1f;
         private static float SPAWN_SIZE_VAR = .2f;
 
         private static float SPAWN_TIME = .5f;
-
 
         
         // Variables
@@ -57,7 +56,7 @@ namespace Game.Combat {
             if (pickable && other.gameObject.tag == "Player") {
                 SlimeController slimeController = other.gameObject.GetComponent<SlimeController>();
                 if (slimeController != null) {
-                    slimeController.ChangeHealth(slimeValue);
+                    slimeController.ChangeHealth(slimeValue * 1.5f);
                     PickedUp();
                 }
             }
