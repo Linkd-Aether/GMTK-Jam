@@ -15,6 +15,9 @@ namespace Game.Character {
         private static float MOVEMENT_THRESHOLD = 2f;
         private static GameObject SLIMEBALL_PREFAB, SLIMEPUNCH_PREFAB;
         private static float SLIMEBALL_COST = 1f, SLIMEPUNCH_COST = 2f;
+        private static float DROP_SLIME_CHANCE = .5f;
+        private static float DAMAGE_EFFECT_TIME = .3f;
+
 
         // Variables
         public float baseMass = .5f;
@@ -22,6 +25,7 @@ namespace Game.Character {
         public bool losesSlimeFromProjectile = false;
 
         protected bool alive = true;
+        private bool invulnerable = false;
         
         // Components & References
         public SlimeMeter healthBar;
@@ -67,25 +71,27 @@ namespace Game.Character {
 
         #region Control Functions
             // Update SlimeHealth and RigidBody Mass
-            public virtual void ChangeHealth(float healthChange) {
-                float slimeAmount = slimeHealth.ChangeSlime(healthChange);
+            public virtual void ChangeHealth(float healthChange, bool fromUse = false) {
+                if (!invulnerable || fromUse || healthChange > 0) {
+                    float slimeAmount = slimeHealth.ChangeSlime(healthChange);
 
-                if (slimeAmount > 0) {
-                    if (healthChange < 0) {
-                        // Slime is damaged
-                        PlayDamageEffect(Mathf.Abs(healthChange));
-                    } else if (healthChange > 0) {
-                        // Slime is healed
-                        PlayHealEffect(healthChange);
+                    if (slimeAmount > 0) {
+                        if (healthChange < 0 && !fromUse) {
+                            // Slime is damaged
+                            PlayDamageEffect(Mathf.Abs(healthChange));
+                        } else if (healthChange > 0) {
+                            // Slime is healed
+                            PlayHealEffect(healthChange);
+                        }
+                        float newMass = CalculateMassFromSlime(slimeAmount);
+                        mover.UpdateMass(newMass);
+                    } else {
+                        SlimeDeathBegin();
+                        alive = false;
                     }
-                    float newMass = CalculateMassFromSlime(slimeAmount);
-                    mover.UpdateMass(newMass);
-                } else {
-                    SlimeDeathBegin();
-                    alive = false;
-                }
 
-                if (healthBar) healthBar.UpdateMeter(slimeHealth);
+                    if (healthBar) healthBar.UpdateMeter(slimeHealth);
+                }
             }
 
             // Spawn a projectile based slimeball attack
@@ -96,9 +102,9 @@ namespace Game.Character {
                 slimeBallObj.transform.localScale = transform.localScale * 1/2;
 
                 SlimeBall slimeBall = slimeBallObj.GetComponent<SlimeBall>();
-                slimeBall.SetupProjectile(this, direction, SLIMEBALL_COST, spriteRenderer.color);
+                slimeBall.SetupProjectile(this, direction, SLIMEBALL_COST, slimeHealth.GetCurrentColor());
 
-                if (losesSlimeFromProjectile) ChangeHealth(-SLIMEBALL_COST);
+                if (losesSlimeFromProjectile) ChangeHealth(-SLIMEBALL_COST, true);
             }
 
             // Spawn a melee based slimepunch attack
@@ -110,10 +116,10 @@ namespace Game.Character {
                 slimePunchObj.transform.parent = transform;
 
                 SlimePunch slimePunch = slimePunchObj.GetComponent<SlimePunch>();
-                slimePunch.SetupProjectile(this, direction, SLIMEPUNCH_COST, spriteRenderer.color);
+                slimePunch.SetupProjectile(this, direction, SLIMEPUNCH_COST, slimeHealth.GetCurrentColor());
 
 
-                if (losesSlimeFromProjectile) ChangeHealth(-SLIMEPUNCH_COST);
+                if (losesSlimeFromProjectile) ChangeHealth(-SLIMEPUNCH_COST, true);
             }
         #endregion
 
@@ -128,11 +134,36 @@ namespace Game.Character {
             }
 
             private void PlayDamageEffect(float magnitude) {
-                // TODO: Damage Effect !!!
+                int freeSlimesToSpawn = 0;
+                for (int i = 0; i < Mathf.FloorToInt(magnitude); i++) {
+                    float randomValue = Random.Range(0f,1f);
+                    if (DROP_SLIME_CHANCE > randomValue) {
+                        freeSlimesToSpawn++;
+                    }
+                }
+                FreeSlime.SpawnFreeSlimes(freeSlimesToSpawn, transform.position, -mover.GetVelocity(), slimeHealth.GetCurrentColor());
+
+                invulnerable = true;
+
+                StartCoroutine(DamageEffect());
+            }
+
+            private IEnumerator DamageEffect() {
+                Color origColor = slimeHealth.GetCurrentColor();
+                Color targColor = LerpUtils.InterpolateColors(.4f, origColor, Color.black);
+                LerpUtils.LerpDelegate LerpColor = (lerpTime) => {
+                    SetColor(LerpUtils.InterpolateColors(lerpTime, origColor, targColor));
+                };
+                yield return StartCoroutine(LerpUtils.LerpCoroutine(LerpColor, 0, 1, DAMAGE_EFFECT_TIME / 2));
+                yield return StartCoroutine(LerpUtils.LerpCoroutine(LerpColor, 1, 0, DAMAGE_EFFECT_TIME / 4));
+                yield return StartCoroutine(LerpUtils.LerpCoroutine(LerpColor, 0, .8f, DAMAGE_EFFECT_TIME / 2));
+                yield return StartCoroutine(LerpUtils.LerpCoroutine(LerpColor, 1, 0, DAMAGE_EFFECT_TIME / 4));
+
+                invulnerable = false;
             }
 
             private void PlayHealEffect(float magnitude) {
-                // TODO: Heal Effect !!!
+                // TODO: Heal Effect
             }
 
             public void HitByKnockback(Vector2 knockbackDir, float knockbackStrength) {

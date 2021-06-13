@@ -89,7 +89,7 @@ namespace Game.Enemy {
         #region Patrol State
             // Update logic for the Patrol state
             private void PatrolUpdate() {
-                if (playerTarget.isAlive() && PatrolForTarget()) {
+                if (playerTarget != null && playerTarget.isAlive() && PatrolForTarget()) {
                     StateToPursue();
                 } else {
                     if (timeRemainingMovement > 0) {
@@ -193,7 +193,7 @@ namespace Game.Enemy {
                 yield return new WaitForSeconds(pouncingPreTime/2);
                 Vector2 direction = DirectionToTarget();
                 yield return new WaitForSeconds(pouncingPreTime/2);
-                mover.ImpulseForce(direction, pouncingStrength);
+                if (alive) mover.ImpulseForce(direction, pouncingStrength);
                 yield return new WaitForSeconds(pouncingPostTime);
                 StateToPursue();
             }

@@ -2,27 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Character;
+using Game.Utils;
 
 
 namespace Game.Combat {
-    public class FreeSlime : MonoBehaviour
+    public class FreeSlime : GFXobject
     {
+        // Constant
+        private static GameObject FREE_SLIME_PREFAB;
+        private static Sprite[] FREE_SLIME_VARIANTS;
+        private static string LOAD_PATH = "Sprites/Slime/Combat/Slime_Ball_Projectile_Sprite_Sheet";
+
+        private static float MIN_SPAWN_DIST = .2f;
+        private static float MAX_SPAWN_DIST = .8f;
+        private static float SPAWN_SIZE_AVG = .5f;
+        private static float SPAWN_SIZE_VAR = .2f;
+
+        private static float SPAWN_TIME = .5f;
+
+        private static float FREE_ANGLE_VAR = 10f;
+        private static int MAX_CHECKS_FOR_FREE_DIR = 3;
+
+        
         // Variables
-        public float slimeValue = 1f;
+        public float slimeValue;
+
+        private bool pickable = false;
 
 
-        private void Awake() {
-            
+        protected override void Awake() {
+            base.Awake();
+
+            FREE_SLIME_VARIANTS = new Sprite[3];
+            Sprite[] spriteSheet = Resources.LoadAll<Sprite>(LOAD_PATH);
+            for (int i = 0; i < FREE_SLIME_VARIANTS.Length; i++) {
+                FREE_SLIME_VARIANTS[i] = spriteSheet[i];
+            }
+        }
+
+        protected override void Start() {
+            base.Start();
+
+            spriteRenderer.sprite = FREE_SLIME_VARIANTS[Random.Range(0, FREE_SLIME_VARIANTS.Length)];
+        }
+
+        private static void LoadPrefab() {
+            FREE_SLIME_PREFAB = Resources.Load<GameObject>("Prefabs/Combat/FreeSlime");
         }
 
         public void PickedUp() {
             // TODO: Slime Removal !!!
             Destroy(this.gameObject);
         }
-
         
         private void OnTriggerEnter2D(Collider2D other) {
-            if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy") {
+            if (pickable && other.gameObject.tag == "Player") {
                 SlimeController slimeController = other.gameObject.GetComponent<SlimeController>();
                 if (slimeController != null) {
                     slimeController.ChangeHealth(slimeValue);
@@ -30,5 +64,51 @@ namespace Game.Combat {
                 }
             }
         }
+
+        #region Spawning 
+            public static void SpawnFreeSlimes(int freeSlimes, Vector2 origin, Vector2 dir, Color color) {
+                LoadPrefab();
+                for (int i = 0; i < freeSlimes; i++) {
+                    FreeSlime.SpawnFreeSlime(origin, dir, color);
+                }
+            }
+
+            private static void SpawnFreeSlime(Vector2 origin, Vector2 initialDir, Color color) {
+                Vector2 dir = FindFreeDirection(origin, initialDir);
+                float range = Random.Range(MIN_SPAWN_DIST, MAX_SPAWN_DIST);
+
+                GameObject freeSlimeObj = Instantiate(FREE_SLIME_PREFAB, (Vector2) origin + dir * range, Quaternion.Euler(0,0,0));
+                
+                FreeSlime freeSlime = freeSlimeObj.GetComponent<FreeSlime>();
+                freeSlime.slimeValue = Random.Range(SPAWN_SIZE_AVG-SPAWN_SIZE_VAR, SPAWN_SIZE_AVG+SPAWN_SIZE_VAR);
+                freeSlime.SetBaseColor(color);
+                freeSlime.StartCoroutine(freeSlime.SpawnIn());
+
+                freeSlimeObj.transform.localScale = Vector3.one * freeSlime.slimeValue;
+            }
+
+            private static Vector2 FindFreeDirection(Vector2 origin, Vector2 dir) {
+                float angleVar = Random.Range(-FREE_ANGLE_VAR, FREE_ANGLE_VAR);
+                float checkAngle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleVar) % 360;
+                int checks = 0;
+
+                while (checks < MAX_CHECKS_FOR_FREE_DIR) {
+                    Vector2 checkDir = OtherUtils.AngleToDirection(checkAngle);
+
+                    if (!Physics2D.Raycast((Vector2) origin - checkDir, checkDir, MAX_SPAWN_DIST - MIN_SPAWN_DIST)) {
+                        return checkDir;
+                    }
+
+                    checkAngle = (checkAngle - angleVar) % 360;
+                    checks++;
+                } 
+                return Vector2.zero;
+            }
+
+            private IEnumerator SpawnIn() {
+                yield return StartCoroutine(LerpUtils.LerpCoroutine(SetAlpha, 0, baseColor.a, SPAWN_TIME));
+                pickable = true;
+            }
+        #endregion
     }
 }
