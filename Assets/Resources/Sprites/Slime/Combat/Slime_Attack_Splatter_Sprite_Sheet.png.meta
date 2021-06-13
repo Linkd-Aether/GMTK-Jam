@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ddc420f7269cb7b4fbe630b99eb83938
+guid: 93c8b9112f263a34ba5fbae20ed7afd8
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -17,6 +17,12 @@ TextureImporter:
   - first:
       213: 7304559483048046316
     second: Slime_Attack_Splatter_Sprite_Sheet_4
+  - first:
+      213: 6747844848737747733
+    second: Slime_Attack_Splatter_Sprite_Sheet_5
+  - first:
+      213: -1380747152451500277
+    second: Slime_Attack_Splatter_Sprite_Sheet_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -218,6 +224,48 @@ TextureImporter:
       bones: []
       spriteID: cee2acb06220f5560800000000000000
       internalID: 7304559483048046316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slime_Attack_Splatter_Sprite_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 9600
+        y: 0
+        width: 1920
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5138678632925ad50800000000000000
+      internalID: 6747844848737747733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slime_Attack_Splatter_Sprite_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 11520
+        y: 0
+        width: 1920
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b070f75c7c996dce0800000000000000
+      internalID: -1380747152451500277
       vertices: []
       indices: 
       edges: []

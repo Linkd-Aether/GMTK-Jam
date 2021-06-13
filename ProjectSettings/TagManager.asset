@@ -6,8 +6,10 @@ TagManager:
   tags:
   - GFX
   - Enemy
+  - Wall
   - Collectable
   - Water
+  - Projectile
   layers:
   - Default
   - TransparentFX

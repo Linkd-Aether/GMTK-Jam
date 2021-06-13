@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Character;
 
 
 namespace Game.Interactables {
@@ -8,6 +9,8 @@ namespace Game.Interactables {
     {
         // Constants
         private static Sprite SPIKES_RAISED_SPRITE, SPIKES_LOWERED_SPRITE;
+        private static float SPIKE_DAMAGE = 1.5f;
+        private static float SPIKE_KNOCKBACK = 10f;
 
         // Variable
         public bool spikesControlledByTime = true;
@@ -16,6 +19,7 @@ namespace Game.Interactables {
         // Components & References
         private new Collider2D collider;
         private SpriteRenderer spriteRenderer;
+
 
         private void Awake() {
             SPIKES_RAISED_SPRITE = Resources.Load<Sprite>("Sprites/Objects/trap/2");
@@ -32,7 +36,7 @@ namespace Game.Interactables {
         }
 
         public void ReleaseSpikes() {
-            collider.enabled = true;
+            collider.enabled = false;
             spriteRenderer.sprite = SPIKES_LOWERED_SPRITE;
         }
 
@@ -46,7 +50,12 @@ namespace Game.Interactables {
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
-            // TODO: Damage Slimes that enter here !!!
+            if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy") {
+                SlimeController slime = other.gameObject.GetComponent<SlimeController>();
+                slime.ChangeHealth(-SPIKE_DAMAGE);
+
+                slime.HitByKnockbackOppositeDirection(SPIKE_KNOCKBACK);
+            }
         }
     }
 }

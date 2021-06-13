@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Pathfinding;
 using Game.Character;
 
@@ -9,15 +10,20 @@ namespace Game.Enemy {
     [RequireComponent(typeof(Seeker))]
     public class EnemyController : SlimeController
     {
+        // Constants
         private enum EnemyState {
             Patrol,
             Pursue,
             Pounce
         }
+        private static float MIN_DAMANGE_FROM_HIT = .75f;
+        private static float SIZE_TO_DAMAGE_FACTOR = .15f;
+        private static float DAMAGE_TO_KNOCKBACK_FACTOR = 3f;
 
         // Variables
         private EnemyState state = EnemyState.Patrol;
-        public Transform target;
+        public SlimeController playerTarget;
+        public UnityEvent slimeDeathEvents;
 
         public float searchDistance = 10f;
         public float chaseDistance = 15f;
@@ -45,16 +51,18 @@ namespace Game.Enemy {
         }
 
         protected override void Update() {
-            base.Update();
-            switch (state) {
-                case (EnemyState.Patrol):
-                    PatrolUpdate();
-                    break;
-                case (EnemyState.Pursue):
-                    PursueUpdate();
-                    break;
-                case (EnemyState.Pounce):
-                    break;
+            if (alive) {
+                base.Update();
+                switch (state) {
+                    case (EnemyState.Patrol):
+                        PatrolUpdate();
+                        break;
+                    case (EnemyState.Pursue):
+                        PursueUpdate();
+                        break;
+                    case (EnemyState.Pounce):
+                        break;
+                }
             }
         }
 
@@ -80,7 +88,7 @@ namespace Game.Enemy {
         #region Patrol State
             // Update logic for the Patrol state
             private void PatrolUpdate() {
-                if (PatrolForTarget()) {
+                if (playerTarget.isAlive() && PatrolForTarget()) {
                     StateToPursue();
                 } else {
                     if (timeRemainingMovement > 0) {
@@ -123,8 +131,12 @@ namespace Game.Enemy {
             // Update logic for the Pursue state
             private void PursueUpdate() {
                 if (path == null || currentWaypoint >= path.vectorPath.Count) return;
+                if (!playerTarget.isAlive()) {
+                    StateToPatrol();
+                    return;
+                }
 
-                float distanceToTarget = Vector2.Distance(transform.position, target.position);
+                float distanceToTarget = Vector2.Distance(transform.position, playerTarget.transform.position);
                 if (distanceToTarget < withinTargetRange) {
                     StateToPounce();
                     return;
@@ -145,9 +157,9 @@ namespace Game.Enemy {
             // Generate a path to the target; is generally called via a InvokeRepeating
             private IEnumerator PathGenerate() {
                 float timeSinceLastPath = pathGenerationRate;
-                while (true) {
+                while (playerTarget != null) {
                     if (timeSinceLastPath >= pathGenerationRate && seeker.IsDone()) {
-                        seeker.StartPath(transform.position, target.position, OnPathGenerated);
+                        seeker.StartPath(transform.position, playerTarget.transform.position, OnPathGenerated);
                         timeSinceLastPath = 0f;
                     } else {
                         timeSinceLastPath += Time.deltaTime;
@@ -189,7 +201,7 @@ namespace Game.Enemy {
         #region Helper Functions
             // Returns the direction to the target
             private Vector2 DirectionToTarget() {
-                return ((Vector2) target.position - (Vector2) transform.position).normalized;
+                return ((Vector2) playerTarget.transform.position - (Vector2) transform.position).normalized;
             }
 
             // Generate a random Vector2
@@ -200,7 +212,7 @@ namespace Game.Enemy {
                 return direction.normalized;
             }
 
-            // Calculate a weighted value for the given direction based off slimes in that direction and open distance
+            // Calculate a weighted value for the given direction based off factors in that direction and open distance
             private float WeightDirection(Vector2 direction) {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, searchDistance);
                 
@@ -210,11 +222,44 @@ namespace Game.Enemy {
                 if (hit.collider == null) colliderType = 3f;
                 else if (hit.collider.tag == "Enemy") colliderType = 0f;
                 else if (hit.collider.tag == "Player") colliderType = 2f;
-                else colliderType = 1.5f;
+                else colliderType = 1f;
 
                 float weight = colliderType * openDistance;
 
                 return weight;
+            }
+        #endregion
+
+        #region Collision & Damage {
+            private void OnCollisionEnter2D(Collision2D other) {
+                if (other.gameObject.tag == "Player") {
+                    SlimeController playerSlime = other.gameObject.GetComponent<SlimeController>();
+
+                    float damage = CalculateDamage();
+                    playerSlime.ChangeHealth(-CalculateDamage());
+
+                    Vector2 knockbackDir = (other.GetContact(0).point - (Vector2) transform.position).normalized;
+                    float knockbackStrength = damage * DAMAGE_TO_KNOCKBACK_FACTOR;
+                    playerSlime.HitByKnockback(knockbackDir, knockbackStrength);
+                }
+            }
+
+            private float CalculateDamage() {
+                return MIN_DAMANGE_FROM_HIT + SIZE_TO_DAMAGE_FACTOR * slimeHealth.slimeCount;
+            }
+        #endregion
+
+        #region Death
+            protected override void SlimeDeathBegin() {
+                base.SlimeDeathBegin();
+                
+                ResetPath();
+            }
+
+            protected override void SlimeDeathEnded() {
+                base.SlimeDeathEnded();
+
+                slimeDeathEvents.Invoke();
             }
         #endregion
     }
