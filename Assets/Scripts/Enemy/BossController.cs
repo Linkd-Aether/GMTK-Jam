@@ -130,7 +130,6 @@ namespace Game.Enemy {
                     float randomValue = Random.Range(0f, 1f);
 
                     if (rage > randomValue) direction = DirectionToTarget();
-                    print($"{rage} rage, {randomValue} randomValue");
                 }                
 
                 float strength = CalculateWithAvgVar(MOVEMENT_STRENGTH_AVERAGE, MOVEMENT_STRENGTH_VARIATION);
