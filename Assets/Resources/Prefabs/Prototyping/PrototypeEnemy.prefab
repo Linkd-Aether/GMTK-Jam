@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7987326691776656785}
   - component: {fileID: 7987326691776656798}
-  - component: {fileID: 7987326691776656799}
   m_Layer: 0
-  m_Name: EnemyGFX
+  m_Name: SlimeGFX
   m_TagString: GFX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,25 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7987326691776656799
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7987326691776656784}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ec9b6a77680518146b207d04d17cd9cb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7987326691852657000
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,6 +96,8 @@ GameObject:
   - component: {fileID: 7987326691852656917}
   - component: {fileID: 7987326691852656918}
   - component: {fileID: 7987326691852656914}
+  - component: {fileID: 6041410927319049176}
+  - component: {fileID: 5499084509630622516}
   m_Layer: 0
   m_Name: PrototypeEnemy
   m_TagString: Enemy
@@ -187,6 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0d2f47f4246f4439af534b4e0b120e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseMass: 0.5
+  massPerSlime: 0.05
+  losesSlimeFromProjectile: 0
   target: {fileID: 0}
   searchDistance: 10
   chaseDistance: 20
@@ -239,3 +224,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+--- !u!95 &6041410927319049176
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7987326691852657000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ec9b6a77680518146b207d04d17cd9cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5499084509630622516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7987326691852657000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53deecac0137e5a44a167ca90049bf80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimeCount: 5
+  sizeMinimum: 0.35
+  sizeChangePerSlime: 0.05
+  usesStages: 0
+  slimePerStage: 0.5
+  sizeChangePerStage: 0.3
+  colorPerStage: []

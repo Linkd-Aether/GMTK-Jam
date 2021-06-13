@@ -19,6 +19,8 @@ namespace Game.Character {
         public float baseMass = .5f;
         public float massPerSlime = .05f;
         public bool losesSlimeFromProjectile = false;
+
+        protected bool alive = true;
         
         // Components & References
         protected Mover mover;
@@ -62,8 +64,21 @@ namespace Game.Character {
             // Update SlimeHealth and RigidBody Mass
             public virtual void ChangeHealth(float healthChange) {
                 float slimeAmount = slimeHealth.ChangeSlime(healthChange);
-                float newMass = CalculateMassFromSlime(slimeAmount);
-                mover.UpdateMass(newMass);
+
+                if (slimeAmount > 0) {
+                    if (healthChange < 0) {
+                        // Slime is damaged
+                        PlayDamageEffect(Mathf.Abs(healthChange));
+                    } else if (healthChange > 0) {
+                        // Slime is healed
+                        PlayHealEffect(healthChange);
+                    }
+                    float newMass = CalculateMassFromSlime(slimeAmount);
+                    mover.UpdateMass(newMass);
+                } else {
+                    SlimeDeathBegin();
+                    alive = false;
+                }
             }
 
             // Spawn a projectile based slimeball attack
@@ -71,6 +86,8 @@ namespace Game.Character {
                 Vector2 spawnPosition = transform.position + (Vector3) direction * transform.localScale.x * 1/2;
 
                 GameObject slimeBallObj = Instantiate(SLIMEBALL_PREFAB, spawnPosition, OtherUtils.DirectionToAngle(direction));
+                slimeBallObj.transform.localScale = transform.localScale * 1/2;
+
                 SlimeBall slimeBall = slimeBallObj.GetComponent<SlimeBall>();
                 slimeBall.SetupProjectile(this, direction, SLIMEBALL_COST, spriteRenderer.color);
 
@@ -93,7 +110,24 @@ namespace Game.Character {
             }
         #endregion
 
-        #region 
+        #region Response Functions
+            protected virtual void SlimeDeathBegin() {
+                mover.UpdateMoverDirection(Vector3.zero);
+                animator.SetBool("Death", true);
+            }
+
+            protected virtual void SlimeDeathEnded() {
+                Destroy(this.gameObject);
+            }
+
+            private void PlayDamageEffect(float magnitude) {
+                // TODO: Damage Effect !!!
+            }
+
+            private void PlayHealEffect(float magnitude) {
+                // TODO: Heal Effect !!!
+            }
+
             public void HitByKnockback(Vector2 knockbackDir, float knockbackStrength) {
                 mover.ImpulseForce(knockbackDir, knockbackStrength);
             }
@@ -102,5 +136,7 @@ namespace Game.Character {
         private float CalculateMassFromSlime(float slimeAmount) {
             return baseMass + slimeAmount * massPerSlime;
         }
+
+        public bool isAlive() { return alive; }
     }
 }

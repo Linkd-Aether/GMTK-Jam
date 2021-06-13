@@ -138,14 +138,6 @@ PrefabInstance:
       propertyPath: moveTimeVariation
       value: 0.01
       objectReference: {fileID: 0}
-    - target: {fileID: 409042126543313867, guid: 9d51e9a62b34f504a9d090feecb49d2f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5658066541325410838, guid: 9d51e9a62b34f504a9d090feecb49d2f, type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5672345225898766390, guid: 9d51e9a62b34f504a9d090feecb49d2f, type: 3}
       propertyPath: m_Name
       value: PrototypePlayer
@@ -306,6 +298,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392d5c480346b9047a61ad993929e896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &915135748 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5672345225898766391, guid: 9d51e9a62b34f504a9d090feecb49d2f, type: 3}
+  m_PrefabInstance: {fileID: 270935258}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85aedbd0bbb66e34d95aaca37e2e543f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &955900870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -317,6 +320,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 270935259}
+    - target: {fileID: 7987326691852656917, guid: e3bc52253f4ca1943ac86cbde51c35f9, type: 3}
+      propertyPath: playerTarget
+      value: 
+      objectReference: {fileID: 915135748}
     - target: {fileID: 7987326691852656919, guid: e3bc52253f4ca1943ac86cbde51c35f9, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -1,28 +1,28 @@
 fileFormatVersion: 2
-guid: 93c8b9112f263a34ba5fbae20ed7afd8
+guid: 657f64b9e1232534ea07a0b4af38fb02
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -690905981662955866
-    second: Slime_Attack_Splatter_Sprite_Sheet_0
+      213: 1924501540615934965
+    second: Slime_Death_SpriteSheet_0
   - first:
-      213: -5101204238707900600
-    second: Slime_Attack_Splatter_Sprite_Sheet_1
+      213: 5945688392593188728
+    second: Slime_Death_SpriteSheet_1
   - first:
-      213: 5986200623060506847
-    second: Slime_Attack_Splatter_Sprite_Sheet_2
+      213: -1307793432280979442
+    second: Slime_Death_SpriteSheet_2
   - first:
-      213: 8510723861508967389
-    second: Slime_Attack_Splatter_Sprite_Sheet_3
+      213: -904546589080599628
+    second: Slime_Death_SpriteSheet_3
   - first:
-      213: 7304559483048046316
-    second: Slime_Attack_Splatter_Sprite_Sheet_4
+      213: 4312211480061879700
+    second: Slime_Death_SpriteSheet_4
   - first:
-      213: 6747844848737747733
-    second: Slime_Attack_Splatter_Sprite_Sheet_5
+      213: 2388559670812846670
+    second: Slime_Death_SpriteSheet_5
   - first:
-      213: -1380747152451500277
-    second: Slime_Attack_Splatter_Sprite_Sheet_6
+      213: 4979285952290937695
+    second: Slime_Death_SpriteSheet_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,7 +124,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Slime_Attack_Splatter_Sprite_Sheet_0
+      name: Slime_Death_SpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -138,14 +138,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a679c59ba86966f0800000000000000
-      internalID: -690905981662955866
+      spriteID: 5f3da1a64f335ba10800000000000000
+      internalID: 1924501540615934965
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Attack_Splatter_Sprite_Sheet_1
+      name: Slime_Death_SpriteSheet_1
       rect:
         serializedVersion: 2
         x: 1920
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84f3911b5c1e439b0800000000000000
-      internalID: -5101204238707900600
+      spriteID: 8772ea96714538250800000000000000
+      internalID: 5945688392593188728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Attack_Splatter_Sprite_Sheet_2
+      name: Slime_Death_SpriteSheet_2
       rect:
         serializedVersion: 2
         x: 3840
@@ -180,14 +180,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd85ebb10c1431350800000000000000
-      internalID: 5986200623060506847
+      spriteID: e08ad456dc8c9dde0800000000000000
+      internalID: -1307793432280979442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Attack_Splatter_Sprite_Sheet_3
+      name: Slime_Death_SpriteSheet_3
       rect:
         serializedVersion: 2
         x: 5760
@@ -201,14 +201,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddbcea2a24a2c1670800000000000000
-      internalID: 8510723861508967389
+      spriteID: 4b34f037ba76273f0800000000000000
+      internalID: -904546589080599628
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Attack_Splatter_Sprite_Sheet_4
+      name: Slime_Death_SpriteSheet_4
       rect:
         serializedVersion: 2
         x: 7680
@@ -222,14 +222,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cee2acb06220f5560800000000000000
-      internalID: 7304559483048046316
+      spriteID: 49523797e7d08db30800000000000000
+      internalID: 4312211480061879700
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Attack_Splatter_Sprite_Sheet_5
+      name: Slime_Death_SpriteSheet_5
       rect:
         serializedVersion: 2
         x: 9600
@@ -243,14 +243,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5138678632925ad50800000000000000
-      internalID: 6747844848737747733
+      spriteID: e4aaf9f8d5ed52120800000000000000
+      internalID: 2388559670812846670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Attack_Splatter_Sprite_Sheet_6
+      name: Slime_Death_SpriteSheet_6
       rect:
         serializedVersion: 2
         x: 11520
@@ -264,8 +264,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b070f75c7c996dce0800000000000000
-      internalID: -1380747152451500277
+      spriteID: f5bd465313af91540800000000000000
+      internalID: 4979285952290937695
       vertices: []
       indices: 
       edges: []

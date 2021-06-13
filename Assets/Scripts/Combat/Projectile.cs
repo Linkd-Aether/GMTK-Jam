@@ -45,8 +45,7 @@ namespace Game.Combat {
             }
 
             protected virtual void HitSlime(SlimeController slime, Vector2 contactPoint) {
-                // Hurt Slime Animation !!!
-                // Reduce Health !!!
+                slime.ChangeHealth(-slimeValue);
                 // Play Slime Hit SFX !!!
                 HitSomething(contactPoint);
             }
