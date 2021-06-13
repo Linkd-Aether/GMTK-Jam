@@ -315,7 +315,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 886611731
+  m_SortingLayerID: 550025563
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: e38a0f639bc3648488efe0fb157d51d3, type: 3}
@@ -894,7 +894,7 @@ Transform:
   m_Children:
   - {fileID: 675742400}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1458750668
 PrefabInstance:
@@ -981,9 +981,17 @@ PrefabInstance:
       value: PlayerSlime
       objectReference: {fileID: 0}
     - target: {fileID: 5672345225898766391, guid: 9d51e9a62b34f504a9d090feecb49d2f, type: 3}
+      propertyPath: baseMass
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672345225898766391, guid: 9d51e9a62b34f504a9d090feecb49d2f, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 818144811}
+    - target: {fileID: 5672345225898766391, guid: 9d51e9a62b34f504a9d090feecb49d2f, type: 3}
+      propertyPath: massPerSlime
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 5672345225898766538, guid: 9d51e9a62b34f504a9d090feecb49d2f, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1304,12 +1312,16 @@ PrefabInstance:
       value: BossSlime
       objectReference: {fileID: 0}
     - target: {fileID: 5115119419162367510, guid: d894c46e8222db14a8c0047bea10da26, type: 3}
+      propertyPath: active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5115119419162367510, guid: d894c46e8222db14a8c0047bea10da26, type: 3}
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 1478613761}
     - target: {fileID: 5115119419162367594, guid: d894c46e8222db14a8c0047bea10da26, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5115119419162367594, guid: d894c46e8222db14a8c0047bea10da26, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1350,6 +1362,14 @@ PrefabInstance:
     - target: {fileID: 5115119419162367594, guid: d894c46e8222db14a8c0047bea10da26, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526374867866997256, guid: d894c46e8222db14a8c0047bea10da26, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526374867866997262, guid: d894c46e8222db14a8c0047bea10da26, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d894c46e8222db14a8c0047bea10da26, type: 3}

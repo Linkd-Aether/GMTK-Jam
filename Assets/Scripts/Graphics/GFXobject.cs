@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Utils;
 
 
 public abstract class GFXobject : MonoBehaviour
 {
     protected SpriteRenderer spriteRenderer;
     protected Color baseColor;
+
+    private static float FREE_ANGLE_VAR = 10f;
+    private static int MAX_CHECKS_FOR_FREE_DIR = 3;
 
 
     protected virtual void Awake() {
@@ -42,5 +46,23 @@ public abstract class GFXobject : MonoBehaviour
                 spriteRenderer = child.GetComponent<SpriteRenderer>();
             }
         }
+    }
+
+    protected static Vector2 FindFreeDirection(Vector2 origin, Vector2 dir, float checkDistance) {
+        float angleVar = Random.Range(-FREE_ANGLE_VAR, FREE_ANGLE_VAR);
+        float checkAngle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleVar) % 360;
+        int checks = 0;
+
+        while (checks < MAX_CHECKS_FOR_FREE_DIR) {
+            Vector2 checkDir = OtherUtils.AngleToDirection(checkAngle);
+
+            if (!Physics2D.Raycast((Vector2) origin - checkDir, checkDir, checkDistance)) {
+                return checkDir;
+            }
+
+            checkAngle = (checkAngle - angleVar) % 360;
+            checks++;
+        } 
+        return Vector2.zero;
     }
 }

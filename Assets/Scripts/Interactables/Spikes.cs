@@ -15,6 +15,7 @@ namespace Game.Interactables {
         // Variable
         public bool spikesControlledByTime = true;
         public float spikesTimeUp = 3f;
+        public bool startUp;
 
         // Components & References
         private new Collider2D collider;
@@ -29,15 +30,22 @@ namespace Game.Interactables {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
+        private void Start() {
+            if (startUp) {
+                RaiseSpikes();
+            }
+        }
+
         public void RaiseSpikes() {
             collider.enabled = true;
             spriteRenderer.sprite = SPIKES_RAISED_SPRITE;
-            if (spikesControlledByTime) StartCoroutine(ReleaseSpikesAfterDelay());
+            if (spikesControlledByTime && !startUp) StartCoroutine(ReleaseSpikesAfterDelay());
         }
 
         public void ReleaseSpikes() {
             collider.enabled = false;
             spriteRenderer.sprite = SPIKES_LOWERED_SPRITE;
+            if (spikesControlledByTime && startUp) StartCoroutine(RaiseSpikesAfterDelay());
         }
 
         private IEnumerator ReleaseSpikesAfterDelay(){
@@ -47,6 +55,15 @@ namespace Game.Interactables {
                 yield return new WaitForEndOfFrame();
             }
             ReleaseSpikes();
+        }
+
+        private IEnumerator RaiseSpikesAfterDelay(){
+            float time = 0;
+            while (time < spikesTimeUp) {
+                time += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            RaiseSpikes();
         }
 
         private void OnTriggerEnter2D(Collider2D other) {

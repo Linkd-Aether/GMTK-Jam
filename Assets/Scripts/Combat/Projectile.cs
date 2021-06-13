@@ -64,11 +64,14 @@ namespace Game.Combat {
 
         #region Projectile Logic
             protected virtual void DespawnProjectile() {
+                FreeSlime.SpawnFreeSlimes(Mathf.FloorToInt(slimeValue), transform.position, direction, baseColor);
                 Destroy(this.gameObject);
             }
 
             protected virtual void SpawnSplatter(Vector2 position) {
                 GameObject splatterObj = Instantiate(SLIME_SPLATTER_PREFAB, position, Quaternion.Euler(0, 0, Random.Range(-180, 180)));
+                splatterObj.transform.localScale = transform.localScale;
+
                 SlimeSplatter splatter = splatterObj.GetComponent<SlimeSplatter>();
                 splatter.SetBaseColor(baseColor);
             }

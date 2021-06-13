@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Character;
+using Game.Combat;
 
 
 namespace Game.Enemy {
@@ -15,10 +16,10 @@ namespace Game.Enemy {
 
         private static float IN_AIR_TIME_AVERAGE = 1.5f;
         private static float IN_AIR_TIME_VARIATION = 1f;
-        private static float BETWEEN_JUMP_TIME_AVERAGE = 3f; // raise
-        private static float BETWEEN_JUMP_TIME_VARIATION = 2f; // raise
-        private static float BETWEEN_MOVE_TIME_AVERAGE = 2f;
-        private static float BETWEEN_MOVE_TIME_VARIATION = 1f;
+        private static float BETWEEN_JUMP_TIME_AVERAGE = 4f;
+        private static float BETWEEN_JUMP_TIME_VARIATION = 1f;
+        private static float BETWEEN_MOVE_TIME_AVERAGE = .5f;
+        private static float BETWEEN_MOVE_TIME_VARIATION = .25f;
         private static float MOVEMENT_STRENGTH_AVERAGE = 15f;
         private static float MOVEMENT_STRENGTH_VARIATION = 5f;
         
@@ -39,6 +40,15 @@ namespace Game.Enemy {
         private float timeToNextMove;
         private bool readyToJump;
 
+        // Components & References
+        private new ParticleSystem particleSystem;
+
+
+        protected override void Awake() {
+            base.Awake();
+
+            particleSystem = GetComponentInChildren<ParticleSystem>();
+        }
 
         protected override void Start()
         {
@@ -87,6 +97,14 @@ namespace Game.Enemy {
                 StartCoroutine(PrepareLanding());
             }
 
+            private void SpawnLanding() {
+                int totalSpawns = Random.Range(0, 4);
+                int freeSpawns = Random.Range(0, totalSpawns);
+
+                FreeSlime.SpawnFreeSlimes(freeSpawns, transform.position, Vector2.down, slimeHealth.GetCurrentColor());
+                EnemyController.SpawnSlimes(totalSpawns - freeSpawns, transform.position, Vector2.down, playerTarget);
+            }
+
             private void EndLand() {
                 animator.SetBool("Landing", false); 
                 state = BossState.Idle;
@@ -94,6 +112,7 @@ namespace Game.Enemy {
 
             private IEnumerator PrepareLanding() {
                 float timeInAir = CalculateWithAvgVar(IN_AIR_TIME_AVERAGE, IN_AIR_TIME_VARIATION);
+                transform.position = playerTarget.transform.position;
 
                 while (timeInAir > 0) {
                     mover.UpdateMoverDirection(DirectionToTarget());
@@ -103,6 +122,11 @@ namespace Game.Enemy {
                 }
                 
                 mover.UpdateMoverDirection(Vector2.zero);
+
+                var main = particleSystem.main;
+                main.playOnAwake = true;
+                main.startColor = slimeHealth.GetCurrentColor();
+                
                 animator.SetBool("Landing", true);
             }
         #endregion
@@ -130,7 +154,6 @@ namespace Game.Enemy {
                     float randomValue = Random.Range(0f, 1f);
 
                     if (rage > randomValue) direction = DirectionToTarget();
-                    print($"{rage} rage, {randomValue} randomValue");
                 }                
 
                 float strength = CalculateWithAvgVar(MOVEMENT_STRENGTH_AVERAGE, MOVEMENT_STRENGTH_VARIATION);
