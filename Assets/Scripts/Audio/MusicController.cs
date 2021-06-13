@@ -6,7 +6,7 @@ using UnityEngine;
 public class MusicController : MonoBehaviour
 {
     public AudioSource[] songs;
-    int targetSong;
+    public int targetSong;
 
     float lastChangeTime;
     float lastUpdate;
@@ -64,5 +64,35 @@ public class MusicController : MonoBehaviour
         targetSong = target;
         targetSong %= songs.Length;
         lastChangeTime = Time.time;
+        if (!songs[targetSong].playOnAwake)
+        {
+            songs[targetSong].Play();
+        }
+    }
+
+    public void ChangeSong(int target, float time)
+    {
+        targetSong = target;
+        targetSong %= songs.Length;
+        lastChangeTime = Time.time;
+        if (!songs[targetSong].playOnAwake)
+        {
+            songs[targetSong].Play();
+        }
+        timeToChange = time;
+        if (time == 0)
+        {
+            for (int i = 0; i < songs.Length; i++)
+            {
+                if (targetSong == i)
+                {
+                    songs[i].volume = 1;
+                }
+                else
+                {
+                    songs[i].volume = 0;
+                }
+            }
+        }
     }
 }
