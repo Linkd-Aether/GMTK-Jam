@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Character;
-using Game.Utils;
+using Game.Interactables;
 
 
 namespace Game.Combat {
@@ -33,26 +33,29 @@ namespace Game.Combat {
 
         #region Collision & Projectile Handling
             protected virtual void OnCollisionEnter2D(Collision2D other) {
-                Vector2 contactPoint = other.GetContact(0).point;
-                if (other.collider.tag == "Enemy" || other.collider.tag == "Player") {
-                    SlimeController slimeController = other.collider.GetComponent<SlimeController>();
-                    if (slimeController != shooter) {
-                        HitSlime(slimeController, contactPoint);
+                if (other.gameObject != shooter.gameObject) {
+                    Vector2 contactPoint = other.GetContact(0).point;
+                    HitSomething(contactPoint);
+
+                    if (other.collider.tag == "Enemy" || other.collider.tag == "Player") {
+                        SlimeController slimeController = other.collider.GetComponent<SlimeController>();
+                        if (slimeController != shooter) {
+                            HitSlime(slimeController, contactPoint);
+                        }
+                    } else if (other.collider.tag == "Breakable") {
+                        BreakableObject breakableObject = other.collider.GetComponent<BreakableObject>();
+                        HitBreakable(breakableObject, contactPoint);
                     }
-                } else if (other.collider.tag == "Breakable") {
-                    HitBreakable(contactPoint);
                 }
             }
 
             protected virtual void HitSlime(SlimeController slime, Vector2 contactPoint) {
                 slime.ChangeHealth(-slimeValue);
                 // Play Slime Hit SFX !!!
-                HitSomething(contactPoint);
             }
-            protected virtual void HitBreakable(Vector2 contactPoint) {
-                // Play Breaking Animation !!!
+            protected virtual void HitBreakable(BreakableObject breakable, Vector2 contactPoint) {
+                breakable.TakeDamage(slimeValue);
                 // Play Breakable Object Hit SFX !!!
-                HitSomething(contactPoint);
             }
             protected virtual void HitSomething(Vector2 contactPoint) {
                 SpawnSplatter(contactPoint);

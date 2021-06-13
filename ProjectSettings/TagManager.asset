@@ -10,6 +10,7 @@ TagManager:
   - Collectable
   - Water
   - Projectile
+  - Breakable
   layers:
   - Default
   - TransparentFX
@@ -50,8 +51,8 @@ TagManager:
   - name: Floor
     uniqueID: 3766275891
     locked: 0
-  - name: Characters
-    uniqueID: 674631533
+  - name: Main
+    uniqueID: 2942248501
     locked: 0
   - name: Walls
     uniqueID: 550025563

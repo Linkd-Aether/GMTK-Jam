@@ -1,28 +1,25 @@
 fileFormatVersion: 2
-guid: d41c74faa478f004fb35f3f7c7a0c7a4
+guid: 4274ecc4fe0447643b92c2ac63bc6115
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5814992158310223973
-    second: SlimeMovingBody_Spritesheet_0
+      213: 2269201849300316437
+    second: barrel_breaking_spritesheet_0
   - first:
-      213: 3473218645677501957
-    second: SlimeMovingBody_Spritesheet_1
+      213: 3170713195271920452
+    second: barrel_breaking_spritesheet_1
   - first:
-      213: -7489992035573207869
-    second: SlimeMovingBody_Spritesheet_2
+      213: -912853833212919415
+    second: barrel_breaking_spritesheet_2
   - first:
-      213: 2245788272133604378
-    second: SlimeMovingBody_Spritesheet_3
+      213: 2312008331689406617
+    second: barrel_breaking_spritesheet_3
   - first:
-      213: -2828538711155187549
-    second: SlimeMovingBody_Spritesheet_4
+      213: 5803934505302802334
+    second: barrel_breaking_spritesheet_4
   - first:
-      213: -6633324159049852746
-    second: SlimeMovingBody_Spritesheet_5
-  - first:
-      213: 378067503332941663
-    second: SlimeMovingBody_Spritesheet_6
+      213: -6031373721534987237
+    second: barrel_breaking_spritesheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,148 +121,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_0
+      name: barrel_breaking_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 1920
         height: 1080
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56053cf0f8003b050800000000000000
-      internalID: 5814992158310223973
+      spriteID: 51174372f03dd7f10800000000000000
+      internalID: 2269201849300316437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_1
+      name: barrel_breaking_spritesheet_1
       rect:
         serializedVersion: 2
-        x: 1920
+        x: 1928
         y: 0
         width: 1920
         height: 1080
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50eeed2d4f9533030800000000000000
-      internalID: 3473218645677501957
+      spriteID: 44b93d81ad2a00c20800000000000000
+      internalID: 3170713195271920452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_2
+      name: barrel_breaking_spritesheet_2
       rect:
         serializedVersion: 2
-        x: 3859
+        x: 3848
         y: 0
         width: 1920
         height: 1080
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cc67256de33e0890800000000000000
-      internalID: -7489992035573207869
+      spriteID: 9818d737644e453f0800000000000000
+      internalID: -912853833212919415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_3
+      name: barrel_breaking_spritesheet_3
       rect:
         serializedVersion: 2
         x: 5760
         y: 0
         width: 1920
         height: 1080
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a140349e884aa2f10800000000000000
-      internalID: 2245788272133604378
+      spriteID: 99037100457e51020800000000000000
+      internalID: 2312008331689406617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_4
+      name: barrel_breaking_spritesheet_4
       rect:
         serializedVersion: 2
-        x: 7699
+        x: 7688
         y: 0
         width: 1920
         height: 1080
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a0672847030fb8d0800000000000000
-      internalID: -2828538711155187549
+      spriteID: e9fb4389ea7bb8050800000000000000
+      internalID: 5803934505302802334
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_5
+      name: barrel_breaking_spritesheet_5
       rect:
         serializedVersion: 2
         x: 9600
         y: 0
         width: 1920
         height: 1080
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b811db72d2b1f3a0800000000000000
-      internalID: -6633324159049852746
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimeMovingBody_Spritesheet_6
-      rect:
-        serializedVersion: 2
-        x: 11520
-        y: 0
-        width: 1920
-        height: 1080
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f5f5745246a2f3500800000000000000
-      internalID: 378067503332941663
+      spriteID: b14084c4e814c4ca0800000000000000
+      internalID: -6031373721534987237
       vertices: []
       indices: 
       edges: []

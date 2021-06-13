@@ -54,7 +54,6 @@ namespace Game.Combat {
 
         protected virtual void HitWall(Vector2 contactPoint) {
             // Play Wall Hit SFX !!!
-            HitSomething(contactPoint);
         }
 
         protected override void HitSomething(Vector2 contactPoint) {
