@@ -10,7 +10,7 @@ namespace Game.UI {
     {
         // Constants
         private static GameObject BAR_PREFAB;
-        private static float BAR_FILL_SCALE = 6.5f;
+        private static float BAR_FILL_SCALE = 6.6f;
         private static float FILL_FACTOR = 1f;
 
         private static float DECREASE_STAGE_EFFECT_SIZE = 0.95f;
@@ -47,9 +47,13 @@ namespace Game.UI {
                 barObj.transform.parent = barHolder;
                 barObj.transform.localPosition = Vector3.zero;
                 barObj.transform.localScale = Vector3.zero;
+                barObj.transform.localEulerAngles = Vector3.zero;
 
                 SpriteRenderer bar = barObj.GetComponentInChildren<SpriteRenderer>();
-                bar.color = slimeHealth.colorPerStage[i+1];
+                Color color = slimeHealth.colorPerStage[i+1];
+                color.a = .75f;
+                
+                bar.color = color;
                 bar.sortingLayerName = "UI";
                 bar.sortingOrder = i;
                 

@@ -1,0 +1,384 @@
+fileFormatVersion: 2
+guid: 7701b02bfb2c0b24dbf89dd5d35a8ec3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4588062056728779481
+    second: Boss_Roar_Sprite_Sheet_Edited_0
+  - first:
+      213: 3052260328933196193
+    second: Boss_Roar_Sprite_Sheet_Edited_1
+  - first:
+      213: 5898120027781416225
+    second: Boss_Roar_Sprite_Sheet_Edited_2
+  - first:
+      213: 6989604674979690716
+    second: Boss_Roar_Sprite_Sheet_Edited_3
+  - first:
+      213: -3006573540412805112
+    second: Boss_Roar_Sprite_Sheet_Edited_4
+  - first:
+      213: -2396220199713931732
+    second: Boss_Roar_Sprite_Sheet_Edited_5
+  - first:
+      213: 5537316707707254693
+    second: Boss_Roar_Sprite_Sheet_Edited_6
+  - first:
+      213: 7801009714473935571
+    second: Boss_Roar_Sprite_Sheet_Edited_7
+  - first:
+      213: 7723187342600515696
+    second: Boss_Roar_Sprite_Sheet_Edited_8
+  - first:
+      213: 5796190701881203347
+    second: Boss_Roar_Sprite_Sheet_Edited_9
+  - first:
+      213: 7667168367224758085
+    second: Boss_Roar_Sprite_Sheet_Edited_10
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 850
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1039.5
+        width: 1798.6666
+        height: 1039.5
+      alignment: 9
+      pivot: {x: 0.31531566, y: 0.014430601}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 725ab353edde350c0800000000000000
+      internalID: -4588062056728779481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_1
+      rect:
+        serializedVersion: 2
+        x: 1798
+        y: 1039.5
+        width: 1798.6666
+        height: 1039.5
+      alignment: 9
+      pivot: {x: 0.3787084, y: 0.011961834}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1841cf89ecb5a20800000000000000
+      internalID: 3052260328933196193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_2
+      rect:
+        serializedVersion: 2
+        x: 3596
+        y: 1035
+        width: 1799
+        height: 1040
+      alignment: 9
+      pivot: {x: 0.44830245, y: 0.014540335}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 125478a6ae45ad150800000000000000
+      internalID: 5898120027781416225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_3
+      rect:
+        serializedVersion: 2
+        x: 5394
+        y: 1039.5
+        width: 1798.6666
+        height: 1039.5
+      alignment: 9
+      pivot: {x: 0.51412517, y: 0.011491285}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd8f29c5b60100160800000000000000
+      internalID: 6989604674979690716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_4
+      rect:
+        serializedVersion: 2
+        x: 7205
+        y: 1039
+        width: 1799
+        height: 1040
+      alignment: 9
+      pivot: {x: 0.5806204, y: 0.01687669}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8003b946b418646d0800000000000000
+      internalID: -3006573540412805112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_5
+      rect:
+        serializedVersion: 2
+        x: 8990
+        y: 1037
+        width: 1799
+        height: 1040
+      alignment: 9
+      pivot: {x: 0.69147354, y: 0.011895986}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2e7f609c6aeebed0800000000000000
+      internalID: -2396220199713931732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1
+        width: 1799
+        height: 1040
+      alignment: 9
+      pivot: {x: 0.29053202, y: 0.011512835}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a7f9bb253088dc40800000000000000
+      internalID: 5537316707707254693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_7
+      rect:
+        serializedVersion: 2
+        x: 1798
+        y: 0.5
+        width: 1798.6666
+        height: 1039.5
+      alignment: 9
+      pivot: {x: 0.36964026, y: 0.016648471}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d22798f001c24c60800000000000000
+      internalID: 7801009714473935571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_8
+      rect:
+        serializedVersion: 2
+        x: 3596
+        y: 0.5
+        width: 1798.6666
+        height: 1039.5
+      alignment: 9
+      pivot: {x: 0.4425799, y: 0.01933376}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0703f7908f54e2b60800000000000000
+      internalID: 7723187342600515696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_9
+      rect:
+        serializedVersion: 2
+        x: 5394
+        y: 0.5
+        width: 1798.6666
+        height: 1039.5
+      alignment: 9
+      pivot: {x: 0.5108637, y: 0.011277898}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39a1d0cdbb4307050800000000000000
+      internalID: 5796190701881203347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Roar_Sprite_Sheet_Edited_10
+      rect:
+        serializedVersion: 2
+        x: 7195
+        y: 1
+        width: 1799
+        height: 1040
+      alignment: 9
+      pivot: {x: 0.5853388, y: 0.008828839}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54f1b81f101476a60800000000000000
+      internalID: 7667168367224758085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

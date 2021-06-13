@@ -53,6 +53,7 @@ namespace Game.Enemy {
         protected override void Update() {
             if (alive) {
                 base.Update();
+                
                 switch (state) {
                     case (EnemyState.Patrol):
                         PatrolUpdate();
