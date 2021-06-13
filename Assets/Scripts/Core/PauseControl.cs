@@ -30,7 +30,7 @@ namespace Game.Core {
         public GameObject ui_container;
         public PlayerController player;
         public InputController inputController;
-        public GameObject[] canvases = new GameObject[3];
+        public GameObject[] canvases = new GameObject[4];
         
         private Overlay overlay; // 0 title, 1 pause, 2 gameOver
 
@@ -51,7 +51,7 @@ namespace Game.Core {
         private void Update() {
             switch (type) {
                 case (PauseType.Title):
-                    if (inputController.GetKeyDown(KeyCode.Space)) {
+                    if (inputController.GetKeyDown(KeyCode.Space) || (inputController.GetMovementInput() != Vector2.zero)) {
                         StartCoroutine(StartGame());
                         type = PauseType.None;
                     }
@@ -127,7 +127,6 @@ namespace Game.Core {
             private IEnumerator StartGame() {
                 yield return StartCoroutine(Unpause());
                 DisappearCanvas(canvases[0]);
-                // Camera target player !!!
             }
         #endregion
 
@@ -145,6 +144,17 @@ namespace Game.Core {
 
             public void QuitGame() {
                 Application.Quit();
+            }
+        #endregion
+
+        #region Win Screen
+            public void WinGame() {
+                StartCoroutine(WinScreen());
+            }
+
+            private IEnumerator WinScreen() {
+                yield return StartCoroutine(Pause());
+                AppearCanvas(canvases[3]);
             }
         #endregion
     }
