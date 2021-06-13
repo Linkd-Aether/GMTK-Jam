@@ -45,6 +45,8 @@ namespace Game.Enemy {
 
         public AudioClip[] roar;
 
+        public MusicController musicController;
+
         private AudioSource audioSource;
 
         protected override void Awake() {
@@ -63,7 +65,7 @@ namespace Game.Enemy {
             timeToNextJump = 2 * CalculateWithAvgVar(BETWEEN_JUMP_TIME_AVERAGE, BETWEEN_JUMP_TIME_VARIATION);
             timeToNextMove = 2 * CalculateWithAvgVar(BETWEEN_MOVE_TIME_AVERAGE, BETWEEN_MOVE_TIME_VARIATION);
 
-            this.audioSource = GetComponent<AudioSource>();
+            this.audioSource = GetComponentInChildren<AudioSource>();
         }
 
         protected override void Update() {
@@ -196,6 +198,11 @@ namespace Game.Enemy {
                 } else {
                     return Mathf.Sqrt(Mathf.Clamp(1 - percentLeft, .15f, 1f));
                 }
+            }
+
+            public void bossMusic()
+            {
+                musicController.ChangeSong(2);
             }
         #endregion
 

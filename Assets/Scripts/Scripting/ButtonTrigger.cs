@@ -13,14 +13,18 @@ namespace Game.Scripting {
         // Variables
         public bool buttonReleases = false;
         public bool onlyPlayerActivates = false;
+        public bool invisible = false;
         
         // Components & References
         private SpriteRenderer spriteRenderer;
 
 
         private void Awake() {
-            BUTTON_PRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Objects/floor button/Button (2)");
-            BUTTON_UNPRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Objects/floor button/Button (1)");
+            if (!invisible)
+            {
+                BUTTON_PRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Objects/floor button/Button (2)");
+                BUTTON_UNPRESSED_SPRITE = Resources.Load<Sprite>("Sprites/Objects/floor button/Button (1)");
+            }
 
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
@@ -39,12 +43,12 @@ namespace Game.Scripting {
 
         protected override void TriggerOn() {
             base.TriggerOn();
-            spriteRenderer.sprite = BUTTON_PRESSED_SPRITE;
+            if(!invisible)spriteRenderer.sprite = BUTTON_PRESSED_SPRITE;
         }
         
         protected override void TriggerOff() {
             base.TriggerOff();
-            spriteRenderer.sprite = BUTTON_UNPRESSED_SPRITE;
+            if(!invisible)spriteRenderer.sprite = BUTTON_UNPRESSED_SPRITE;
         }
     }
 }
