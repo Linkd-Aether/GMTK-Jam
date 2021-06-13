@@ -20,8 +20,6 @@ namespace Game.Combat {
 
         private static float SPAWN_TIME = .5f;
 
-        private static float FREE_ANGLE_VAR = 10f;
-        private static int MAX_CHECKS_FOR_FREE_DIR = 3;
 
         
         // Variables
@@ -74,7 +72,7 @@ namespace Game.Combat {
             }
 
             private static void SpawnFreeSlime(Vector2 origin, Vector2 initialDir, Color color) {
-                Vector2 dir = FindFreeDirection(origin, initialDir);
+                Vector2 dir = FindFreeDirection(origin, initialDir, MAX_SPAWN_DIST - MIN_SPAWN_DIST);
                 float range = Random.Range(MIN_SPAWN_DIST, MAX_SPAWN_DIST);
 
                 GameObject freeSlimeObj = Instantiate(FREE_SLIME_PREFAB, (Vector2) origin + dir * range, Quaternion.Euler(0,0,0));
@@ -85,24 +83,6 @@ namespace Game.Combat {
                 freeSlime.StartCoroutine(freeSlime.SpawnIn());
 
                 freeSlimeObj.transform.localScale = Vector3.one * freeSlime.slimeValue;
-            }
-
-            private static Vector2 FindFreeDirection(Vector2 origin, Vector2 dir) {
-                float angleVar = Random.Range(-FREE_ANGLE_VAR, FREE_ANGLE_VAR);
-                float checkAngle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleVar) % 360;
-                int checks = 0;
-
-                while (checks < MAX_CHECKS_FOR_FREE_DIR) {
-                    Vector2 checkDir = OtherUtils.AngleToDirection(checkAngle);
-
-                    if (!Physics2D.Raycast((Vector2) origin - checkDir, checkDir, MAX_SPAWN_DIST - MIN_SPAWN_DIST)) {
-                        return checkDir;
-                    }
-
-                    checkAngle = (checkAngle - angleVar) % 360;
-                    checks++;
-                } 
-                return Vector2.zero;
             }
 
             private IEnumerator SpawnIn() {

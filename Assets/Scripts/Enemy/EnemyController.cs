@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Pathfinding;
 using Game.Character;
+using Game.Utils;
 
 
 namespace Game.Enemy {
@@ -19,6 +20,11 @@ namespace Game.Enemy {
         private static float MIN_DAMANGE_FROM_HIT = .75f;
         private static float SIZE_TO_DAMAGE_FACTOR = .15f;
         private static float DAMAGE_TO_KNOCKBACK_FACTOR = 3f;
+
+        private static float MIN_SPAWN_DIST = 1f;
+        private static float MAX_SPAWN_DIST = 1.5f;
+        private static float SPAWN_TIME = .75f;
+        private static GameObject SLIME_PREFAB;
 
         // Variables
         private EnemyState state = EnemyState.Patrol;
@@ -47,7 +53,13 @@ namespace Game.Enemy {
         
         protected override void Awake() {
             base.Awake();
+
             seeker = GetComponent<Seeker>();
+            LoadPrefab();
+        }
+
+        private static void LoadPrefab() {
+            SLIME_PREFAB = Resources.Load<GameObject>("Prefabs/Characters/EnemySlime");
         }
 
         protected override void Update() {
@@ -261,6 +273,36 @@ namespace Game.Enemy {
                 base.SlimeDeathEnded();
 
                 slimeDeathEvents.Invoke();
+            }
+        #endregion
+
+        #region Spawning 
+            public static void SpawnSlimes(int slimes, Vector2 origin, Vector2 dir, SlimeController player) {
+                LoadPrefab();
+                for (int i = 0; i < slimes; i++) {
+                    EnemyController.SpawnSlime(origin, dir, player);
+                }
+            }
+
+            public static void SpawnSlime(Vector2 origin, Vector2 initialDir, SlimeController player) {
+                Vector2 dir = FindFreeDirection(origin, initialDir, MAX_SPAWN_DIST - MIN_SPAWN_DIST);
+                float range = Random.Range(MIN_SPAWN_DIST, MAX_SPAWN_DIST);
+
+                GameObject slimeObj = Instantiate(SLIME_PREFAB, (Vector2) origin + dir * range, Quaternion.Euler(0,0,0));
+                
+                EnemyController slime = slimeObj.GetComponent<EnemyController>();
+                slime.SetInitValues(player);
+                slime.StartCoroutine(slime.SpawnIn());
+            }
+
+            private void SetInitValues(SlimeController player) {
+                playerTarget = player;
+                alive = false;
+            }
+
+            private IEnumerator SpawnIn() {
+                yield return StartCoroutine(LerpUtils.LerpCoroutine(SetAlpha, 0, baseColor.a, SPAWN_TIME));
+                alive = true;
             }
         #endregion
     }

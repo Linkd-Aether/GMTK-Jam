@@ -21,7 +21,7 @@ namespace Game.Character {
 
         // Variables
         public float baseMass = .5f;
-        public float massPerSlime = .05f;
+        public float massPerSlime = .02f;
         public bool losesSlimeFromProjectile = false;
 
         protected bool alive = true;
