@@ -60,3 +60,6 @@ TagManager:
   - name: UI
     uniqueID: 3220189593
     locked: 0
+  - name: Overlay
+    uniqueID: 752876543
+    locked: 0
