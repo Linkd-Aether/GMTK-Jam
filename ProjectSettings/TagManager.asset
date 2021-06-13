@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Collectable
   - Water
+  - Projectile
   layers:
   - Default
   - TransparentFX

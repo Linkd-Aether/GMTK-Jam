@@ -23,5 +23,7 @@ namespace Game.Scripting {
             offTriggerEvent.Invoke();
             triggerState = false;
         }
+
+        public virtual void OnChildTriggered(Collider2D other) {}
     }
 }
