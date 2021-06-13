@@ -136,7 +136,8 @@ namespace Game.Character {
             }
 
             public Color GetCurrentColor() {
-                return colorPerStage[currentStage];
+                if (usesStages) return colorPerStage[currentStage];
+                else return spriteRenderer.color;
             }
         #endregion
     }

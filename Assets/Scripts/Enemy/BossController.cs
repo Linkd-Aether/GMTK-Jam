@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Character;
+using Game.Combat;
 
 
 namespace Game.Enemy {
@@ -39,6 +40,15 @@ namespace Game.Enemy {
         private float timeToNextMove;
         private bool readyToJump;
 
+        // Components & References
+        private new ParticleSystem particleSystem;
+
+
+        protected override void Awake() {
+            base.Awake();
+
+            particleSystem = GetComponentInChildren<ParticleSystem>();
+        }
 
         protected override void Start()
         {
@@ -87,6 +97,14 @@ namespace Game.Enemy {
                 StartCoroutine(PrepareLanding());
             }
 
+            private void SpawnLanding() {
+                int totalSpawns = Random.Range(0, 4);
+                int freeSpawns = Random.Range(0, totalSpawns);
+
+                FreeSlime.SpawnFreeSlimes(freeSpawns, transform.position, Vector2.down, slimeHealth.GetCurrentColor());
+                EnemyController.SpawnSlimes(totalSpawns - freeSpawns, transform.position, Vector2.down, playerTarget);
+            }
+
             private void EndLand() {
                 animator.SetBool("Landing", false); 
                 state = BossState.Idle;
@@ -94,6 +112,7 @@ namespace Game.Enemy {
 
             private IEnumerator PrepareLanding() {
                 float timeInAir = CalculateWithAvgVar(IN_AIR_TIME_AVERAGE, IN_AIR_TIME_VARIATION);
+                transform.position = playerTarget.transform.position;
 
                 while (timeInAir > 0) {
                     mover.UpdateMoverDirection(DirectionToTarget());
@@ -103,6 +122,11 @@ namespace Game.Enemy {
                 }
                 
                 mover.UpdateMoverDirection(Vector2.zero);
+
+                var main = particleSystem.main;
+                main.playOnAwake = true;
+                main.startColor = slimeHealth.GetCurrentColor();
+                
                 animator.SetBool("Landing", true);
             }
         #endregion
