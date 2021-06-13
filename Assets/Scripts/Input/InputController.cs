@@ -5,13 +5,20 @@ using UnityEngine;
 namespace Game.Input {
     public class InputController : MonoBehaviour
     {
-        private bool mouseEnabled = false;
+
+        public SFXController sfx;
+
+        private bool mouseEnabled = true;
 
         // Get movement vector
         public Vector2 GetMovementInput() {
             Vector2 input = new Vector2();
             input.x = UnityEngine.Input.GetAxisRaw("Horizontal");
             input.y = UnityEngine.Input.GetAxisRaw("Vertical");
+            if (input.x != 0 || input.y != 0)
+            {
+                sfx.Play(11 + Random.Range(0, 1));
+            }
             return input.normalized;
         }
 
