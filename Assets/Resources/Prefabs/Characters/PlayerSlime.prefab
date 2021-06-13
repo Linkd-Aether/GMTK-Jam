@@ -339,6 +339,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SFX
       objectReference: {fileID: 0}
+    - target: {fileID: 5365715893270626443, guid: ffc318901a260074196fe6f2002815ed, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5902954357511081951, guid: ffc318901a260074196fe6f2002815ed, type: 3}
       propertyPath: m_RootOrder
       value: 0
