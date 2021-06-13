@@ -64,7 +64,7 @@ namespace Game.Player {
         protected override void SlimeDeathEnded()
         {
             // TODO: Player Death !!!
-            base.SlimeDeathEnded();
+            gameObject.SetActive(false);
         }
     }
 }

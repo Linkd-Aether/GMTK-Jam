@@ -15,6 +15,7 @@ namespace Game.Character {
         private static float MOVEMENT_THRESHOLD = 2f;
         private static GameObject SLIMEBALL_PREFAB, SLIMEPUNCH_PREFAB;
         private static float SLIMEBALL_COST = 1f, SLIMEPUNCH_COST = 2f;
+        private static float DROP_SLIME_CHANCE = .5f;
 
         // Variables
         public float baseMass = .5f;
@@ -67,11 +68,11 @@ namespace Game.Character {
 
         #region Control Functions
             // Update SlimeHealth and RigidBody Mass
-            public virtual void ChangeHealth(float healthChange) {
+            public virtual void ChangeHealth(float healthChange, bool fromUse = false) {
                 float slimeAmount = slimeHealth.ChangeSlime(healthChange);
 
                 if (slimeAmount > 0) {
-                    if (healthChange < 0) {
+                    if (healthChange < 0 && !fromUse) {
                         // Slime is damaged
                         PlayDamageEffect(Mathf.Abs(healthChange));
                     } else if (healthChange > 0) {
@@ -98,7 +99,7 @@ namespace Game.Character {
                 SlimeBall slimeBall = slimeBallObj.GetComponent<SlimeBall>();
                 slimeBall.SetupProjectile(this, direction, SLIMEBALL_COST, spriteRenderer.color);
 
-                if (losesSlimeFromProjectile) ChangeHealth(-SLIMEBALL_COST);
+                if (losesSlimeFromProjectile) ChangeHealth(-SLIMEBALL_COST, true);
             }
 
             // Spawn a melee based slimepunch attack
@@ -113,7 +114,7 @@ namespace Game.Character {
                 slimePunch.SetupProjectile(this, direction, SLIMEPUNCH_COST, spriteRenderer.color);
 
 
-                if (losesSlimeFromProjectile) ChangeHealth(-SLIMEPUNCH_COST);
+                if (losesSlimeFromProjectile) ChangeHealth(-SLIMEPUNCH_COST, true);
             }
         #endregion
 
@@ -129,6 +130,16 @@ namespace Game.Character {
 
             private void PlayDamageEffect(float magnitude) {
                 // TODO: Damage Effect !!!
+
+                int freeSlimesToSpawn = 0;
+                for (int i = 0; i < Mathf.FloorToInt(magnitude); i++) {
+                    float randomValue = Random.Range(0f,1f);
+                    if (DROP_SLIME_CHANCE > randomValue) {
+                        freeSlimesToSpawn++;
+                    }
+                }
+                FreeSlime.SpawnFreeSlimes(freeSlimesToSpawn, transform.position, -mover.GetVelocity(), baseColor);
+
             }
 
             private void PlayHealEffect(float magnitude) {
