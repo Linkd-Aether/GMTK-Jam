@@ -206,7 +206,7 @@ namespace Game.Enemy {
 
             public void bossMusic()
             {
-                musicController.ChangeSong(2);
+                musicController.ChangeSong(3, 0);
             }
         #endregion
 

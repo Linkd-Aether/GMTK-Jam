@@ -25,6 +25,7 @@ public class SFXController : MonoBehaviour
         if (lastPlayed != i || !source.isPlaying)
         {
             source.clip = sfx[i];
+            source.pitch = (float) Random.Range(0.2f, 2.2f);
             source.Play();
             lastPlayed = i;
         }
